@@ -10,7 +10,7 @@
 <!-- Uses a transparent header that draws on top of the layout's background -->
 <style>
 .demo-layout-transparent {
-    background: url('transparent.jpg') center / cover;
+    background: "#ccc" center / cover;
 }
 .demo-layout-transparent .mdl-layout__header,
 .demo-layout-transparent .mdl-layout__drawer-button {
@@ -67,13 +67,26 @@
 
                 <h2>MPI Cluster Using Guide</h2>
 
-                <section id="downloads">
+                <div class="demo-card-wide mdl-card mdl-shadow--5dp">
+                  <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">MPI and HPC</h2>
+                  </div>
+                  <div class="mdl-card__supporting-text">
+                    This a notes about high performance cluster and MPI system for my lab.
+                  </div>
+                  <div class="mdl-card__actions mdl-card--border">
                     <a href="http://hpclab.cs.tsinghua.edu.cn/~duzh/book/mpi.pdf" class="btn">下载：并行编程 MPI PDF</a>
                     <a href="http://www.ll.mit.edu/mission/cybersec/softwaretools/matlabmpi/matlabmpi.html" class="btn">MatlabMPI</a>
                     <a href="http://www.ssc.net.cn/files/MPI%E7%BC%96%E7%A8%8B%E5%88%9D%E6%AD%A5.pdf" class="btn">下载：MPI并行编程初步（张丹丹）</a>
                     <a href="http://hydro.igsnrr.ac.cn/data/resources/PBS.pdf" class="btn">PBS脚本编写使用</a>
                     <a href="https://github.com/Docurdt/csbio220.github.io" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-                </section>
+                    </div>
+                <!--div class="mdl-card__menu">
+                  <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                    <i class="material-icons">share</i>
+                  </button>
+              </div-->
+                </div>
 
 
 
