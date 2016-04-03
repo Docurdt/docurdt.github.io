@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<title>Eric's blog</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+<head>
+    <link rel="shortcut icon" href="/transparent.jpg" type="image/x-icon" />
+</head>
+<!-- Uses a transparent header that draws on top of the layout's background -->
+<style>
+.demo-layout-transparent {
+    background: url('transparent.jpg') center / cover;
+}
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+    /* This background is dark, so we set text to white. Use 87% black instead if
+    your background is light. */
+    color: white;
+}
+.demo-card-wide.mdl-card {
+    width: 100%;
+}
+.demo-card-wide > .mdl-card__title {
+    color: #555;
+    height: 500px;
+    background: url('transparent.jpg') center / cover;
+}
+.demo-card-wide > .mdl-card__menu {
+    color: #fff;
+}
+</style>
+
+<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header mdl-layout__header--transparent">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Eric's blog</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <!--img src="transparent.jpg" width="35px" height="45px" style="margin-top:10px;"/-->
+
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation -->
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="">Home</a>
+                <a class="mdl-navigation__link" href="">Notes</a>
+                <a class="mdl-navigation__link" href="">Plans</a>
+                <a class="mdl-navigation__link" href="">About me</a>
+            </nav>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Eric's blog</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">Home</a>
+            <a class="mdl-navigation__link" href="">Notes</a>
+            <a class="mdl-navigation__link" href="">Plans</a>
+            <a class="mdl-navigation__link" href="">About me</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content">
+
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--2-col"></div>
+            <div class="mdl-cell mdl-cell--8-col">
+
+
+                <h2>MPI Cluster Using Guide</h2>
+
+                <section id="downloads">
+                    <a href="http://hpclab.cs.tsinghua.edu.cn/~duzh/book/mpi.pdf" class="btn">下载：并行编程 MPI PDF</a>
+                    <a href="http://www.ll.mit.edu/mission/cybersec/softwaretools/matlabmpi/matlabmpi.html" class="btn">MatlabMPI</a>
+                    <a href="http://www.ssc.net.cn/files/MPI%E7%BC%96%E7%A8%8B%E5%88%9D%E6%AD%A5.pdf" class="btn">下载：MPI并行编程初步（张丹丹）</a>
+                    <a href="http://hydro.igsnrr.ac.cn/data/resources/PBS.pdf" class="btn">PBS脚本编写使用</a>
+                    <a href="https://github.com/Docurdt/csbio220.github.io" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+                </section>
+
+
+
+                <p>本笔记处于不断更新过程中，遇到问题时，请首先到这里查阅，谢谢！</p>
+
+                <p>这篇笔记对MPI并行编程和PBS任务管理系统的使用做简单的介绍，这篇笔记的书写离不开都志辉博士编写的《高性能计算之并行编程技术》以及Parallel Programming with MatlabMPI(by Dr. Jeremy Kepner), 在此向他们表示感谢！</p>
+
+                <p>服务器使用过程中必须的基本知识：
+                    <pre><code>1. vim的基本使用；
+                        2. 常用Linux指令及Linux文件目录管理；
+                    </code></pre>
+                </p>
+
+
+                <p>服务器使用过程中的程序调试：
+                    <pre><code>1. 关注自己程序所需要的内存，内存不足时请指定内存大小；
+                        2. matlab程序在运行结束后可能不能自己关闭，请在程序后面添加exit，
+                        使程序在执行完毕后正常退出；
+                        3. 当发现提交的任务不正常退出时，请使用top指令观察内存中是否有未结
+                        束的程序驻留，使用matlab < MatlabMPI/src/MPI_Abort.m 杀掉残留进程；
+                        4. 每个MatlabMPI的程序都需要在当前目录下生成一个MatMPI的文件夹来存
+                        放当前环境变量，因此当有多个并行的Matlab程序时，请将其存放在不同
+                        文件夹中。
+                    </code></pre>
+                </p>
+
+
+
+
+
+
+
+                <p>书写过程中难免有错误的地方，欢迎大家fork my repo。下面是笔记的主要内容:</p>
+
+                <pre><code>1. 什么是MPI？
+                    2. First MPI programme for C or C++（Hello world！）；
+                    3. MatlabMPI examples；
+                    4. 使用PBS提交任务；
+                    5. 任务查看及管理；
+                    6. 支持。
+                </code></pre>
+
+
+                <h3><a id="what-is-mpi" class="anchor" href="#what-is-mpi" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. 什么是MPI？</h3>
+
+                    <p>对MPI的定义是多种多样的，但不外乎下面三个方面，它们限定了MPI的内涵和外延。</p>
+                    <p>----MPI是一个库，而不是一门语言。许多人认为MPI就是一种并行语言这是不准确的，但是按照并行语言的分类，可以把FORTRAN+MPI或C+MPI，看作是一种在原来串行语言基础之上扩展后得到的并行语言。MPI库可以被FORTRAN77/C/Fortran90/C++调用，从语法上说，它遵守所有对库函数/过程的调用规则，和一般的函数/过程没有什么区别。</p>
+                    <p>----MPI是一种标准或规范的代表，而不特指某一个对它的具体实现。迄今为止，所有的并行计算机制造商都提供对MPI的支持，可以在网上免费得到MPI在不同并行计算机上的实现。一个正确的MPI程序，可以不加修改地在所有的并行机上运行。</p>
+                    <p>----MPI是一种消息传递编程模型，并成为这种编程模型的代表和事实上的标准。MPI虽然很庞大，但是它的最终目的是服务于进程间通信这一目标的。</p>
+                    <p>在MPI上很容易移植其它的并行代码，而且编程者不需要去努力掌握许多其它的全新概念，就可以学习编写MPI程序。当然，这并不意味着MPI已经十分完美，必须承认MPI自身还存在着一些缺点。</p>
+                    <p>消息传递方式是广泛应用于多类并行机的一种模式,特别是那些分布存储并行机。尽管在具体的实现上有许多不同, 但通过消息完成进程通信的基本概念是容易理解的 十多年来，这种模式在重要的计算应用中已取得了实质进步，有效和可移植地实现一个消息传递系统是可行的。因此，通过定义核心库程序的语法、语义，这将在大范围计算机上可有效实现将有益于广大用户，这是MPI产生的重要原因。</p>
+
+
+                    <h3><a id="first-c" class="anchor" href="#first-c" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. First MPI programme for C or C++（Hello world！）</h3>
+
+                        <p>C+MPI并行程序的程序结构如下图所示，下面分几个部分对它的结构进行介绍：</p>
+                        <img src="images/mpi.png" width="598" height="620" />
+
+                        <pre><code>#include "mpi.h"
+                            #include <stdio.h>
+                                #include <math.h>
+                                    void main(argc,argv)
+                                    int argc;
+                                    char *argv[];
+                                    {
+                                        int myid, numprocs;
+                                        int namelen;
+                                        char processor_name[MPI_MAX_PROCESSOR_NAME];
+                                        MPI_Init(&argc,&argv);
+                                        MPI_Comm_rank(MPI_COMM_WORLD,&myid);
+                                        MPI_Comm_size(MPI_COMM_WORLD,&numprocs);
+                                        MPI_Get_processor_name(processor_name,&namelen);
+                                        fprintf(stderr,"Hello World! Process %d of %d on %s\n",
+                                        myid, numprocs, processor_name); //打印
+                                        MPI_Finalize();
+                                    }
+
+                                    说明：
+                                    在上述的代码中，执行的用户程序就是打印信息。
+                                    上述代码在编译后，通过设置参数，指定其运行的节点及进程数，它将在不同的节点被执行。
+                                    由于不同节点的名称不同，所以打印出的信息也不相同。
+
+                                    这段程序中，每个进程执行同样的任务，在实际使用中意义不大。我们需要
+                                    相互独立的不同的任务放到不同节点去运行，以提升任务的完成速度。
+                                    这需要根据我们的实际需要，发挥我们的能力去解决，即如何将原有的程序转化成
+                                    并行执行的程序！
+                                </code></pre>
+
+                                <p>第一部分：首先要有MPI相对于C实现的头文件mpi.h，代码见上方所示；</p>
+                                <p>第二部分：定义程序中所需要的与MPI有关的变量 MPI_MAX_PROCESSOR_NAME是MPI预定义的宏，即某一MPI的具体实现中允许机器名字的最大长度。机器名放在变量
+                                    processor_name中，整型变量myid和numprocs分别用来记录某一个并行执行进程的标识和所有参加计算的进程的个数，namelen是实际得到的机器名字的长度；</p>
+                                    <p>第三部分：MPI程序的开始和结束必须是MPI_Init和MPI_Finalize，分别完成MPI程序的初始化和结束工作。C程序中以 MPI_ 开头，后面的部分第一个字母大写
+                                        而其它的后续部分小写；</p>
+                                        <p>第四部分：MPI程序的程序体，包括各种MPI过程调用语句和C语句。MPI_Comm_rank得到当前正在运行的进程的标识号，放在myid中；MPI_Comm_size得到所有参加运算的进程的个数，放在numprocs中；MPI_Get_processor_name得到本进程运行的机器的名称，结果放在processor_name中，它是一个字符串，而该字符串的长度放namelen中；fprintf语句将本进程的标识号、并行执行的进程的个数、本进程所运行的机器的名字打印出来。和一般的C程序不同的是这些程序体中的执行语句是并行执行的，每一个进程都要执行。不妨指定本程序启动时共产生4个进程同时运行，而运行本程序的机器的机器名为tp5，4个进程都在tp5上运行，其标识分别为0 1 2 3，执行结果如下图所示。虽然这一MPI程序本身只有一条打印语句，但是由于它启动了四个进程同时执行，每个进程都执行打印操作，故而最终的执行结果有四条打印语句。</p>
+                                        <pre><code>$ Hello World! Process 0 of 4 on tp5
+                                            $ Hello World! Process 1 of 4 on tp5
+                                            $ Hello World! Process 3 of 4 on tp5
+                                            $ Hello World! Process 2 of 4 on tp5
+                                        </code></pre>
+                                        <p>代码的编译指令如下：</p>
+                                        <pre><code>$ mpicc –O2 –o hello hello.c //生成hello可执行程序</code></pre>
+
+                                        <p>可执行程序的运行指令如下，但并行程序的提交一律使用PBS脚本提交任务，下述指令仅可用于测试。详见第四部分的内容。</p>
+                                        <pre><code>$ mpirun –np 4 ／home/username/hello //运行hello可执行程序
+                                            /*说明 -np 4 表示4个进程； 需使用绝对路径指定可执行程序*/
+                                        </code></pre>
+
+                                        <h3>
+                                            <a id="first-matlab" class="anchor" href="#first-matlab" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+                                            3. MatlabMPI 使用流程
+                                        </h3>
+
+                                            <p>MatlabMPI是一个Matlab脚本程序包，是MPI的Matlab脚本实现，使得Matlab程序可以在并行计算机上运行。下面通过运行其程序包中的例子具体使用说明其使用方法，如有疑问也可以打开其源代码查看，具体如下：</p>
+                                            <p>1. 复制MatlabMPI到自己用户目录下（该文件夹已经在服务器上，路径：/home/mpiuser/MatlabMPI）；</p>
+                                            <p>2. 以运行Helloworld.m为例讲解运行方法；</p>
+                                            <p>3. 首先Helloworld.m是使用并行编程的思想编写；</p>
+                                            <p>4. 为了配合运行Helloworld.m，我们需要修改两个脚本模板：task和matlabTask.m。模板的详细内容在下文会列出；</p>
+                                            <p>5. 修改完成后，qsub task 提交任务；</p>
+                                            <p>6. 使用qstat xxx，查看编号为xxx的任务状态。</p>
+
+
+                                            <p> </p>
+                                            <p> task脚本模板</p>
+                                            <pre><code>  1 #!/bin/sh
+                                                2 #PBS -N JobName
+                                                3 #PBS -l walltime=24:00:00
+                                                4 #PBS -l nodes=3:ppn=16
+                                                5 #PBS -l pmem=600mb
+                                                6 #PBS -d /home/username/workspace
+                                                7 #PBS -e /home/username/workspace/output/$PBS_JOBID.err
+                                                8 #PBS -o /home/username/workspace/output/$PBS_JOBID.out
+                                                9 date
+                                                10 export LC_ALL="C"
+                                                11 matlab < matlabTask.m
+                                                12 date
+
+
+                                                说明：
+                                                在上述代码中，第二行定义任务名称；
+                                                第三行设置程序运行的最长时间；
+                                                第四行设置需要的节点数，示例中为3＊16=48个CPU；
+                                                第五行指定每个进程需要的内存大小；
+                                                第六行设置程序路径；
+                                                第七行和第八行设置错误信息和输出信息的输出路径；
+                                                第九行和第十二行打印当前时间；
+                                            </code></pre>
+
+
+                                            <p> </p>
+                                            <p> matlabTask.m脚本模板</p>
+                                            <pre><code>  1 addpath(genpath('~/workspace/MatlabMPI/src'));
+                                                2 MPI_Abort;
+                                                3 MatMPI_Delete_all();
+                                                4 [n,machines]=MPI_Getnodes;
+                                                5 eval( MPI_Run('Helloworld',n,machines));
+                                                6 disp('success!');
+                                                7 exit
+
+                                                说明：
+                                                在上述代码中，第一行添加函数库路径；
+                                                第二三行为MatlabMPI的初始化函数；
+                                                第四行获取当前分配的节点及节点数目；
+                                                第五行调用Helloworld.m；
+                                                第六行和第七行打印提示信息和退出。
+                                            </code></pre>
+
+                                            <p> </p>
+
+                                            <p>下面是Helloworld.m代码，功能是将10次的循环分解，并发执行，具体说明见代码中的说明：</p>
+
+                                            <pre><code> 下面的代码会被每个进程执行一遍，循环模块根据当前rank号和循环变量决定是否执行。
+                                                1 MPI_Init; %MPI初始化
+                                                2 comm = MPI_COMM_WORLD; %获取MPI环境变量，comm为一个结构体
+                                                3 comm_size = MPI_Comm_size(comm); % 总进程数
+                                                4 my_rank = MPI_Comm_rank(comm); %获取当前进程编号
+                                                5 for i = 1:10	 %此循环10次，根据当前进程编号以及循环变量确定是否执行。
+                                                6 	if mod(i,comm_size) ~= my_rank
+                                                7         continue;
+                                                8     end
+                                                9 	%%你的并行程序加到这下面%%
+                                                10	...
+                                                11 end
+                                                12 MPI_Finalize;
+                                            </code></pre>
+
+
+
+
+                                            <h3><a id="sub-task" class="anchor" href="#sub-task" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. 使用PBS提交任务</h3>
+
+                                                <p>任务（程序或命令）：可以是用户程序（如C程序），也可以是系统命令下面是一个完整的任务脚本例子，脚本名为 mytask：</p>
+                                                <pre><code>#!/bin/bash //指明所用的 shell
+                                                    #PBS –N mytask //设置任务名称
+                                                    #PBS -l walltime=1:00:00 //请求任务执行时间
+                                                    #PBS -l nodes=1:ppn=16 //请求任务执行所需资源:1个节点，每个节点：32个cpu.
+                                                    #PBS -e /home/username/$PBS_JOBID.err //定义输出运行过程中的错误信息路径
+                                                    #PBS -o /home/username/$PBS_JOBID.out //定义输出信息路径
+                                                    date  //系统命令（打印日期时间）
+                                                    mpirun –np 4 /home/username/my_application //执行的任务 for c/c++
+                                                    //(当前名为 my_application的任务)
+
+                                                    date  // 系统命令（打印日期时间）
+                                                </code></pre>
+
+                                                <p>第1行说明所用的 shell；第2至6行是pbs指示语句，设置了任务的一些属性，并请求了资源；第7至10行是要执行的命令及任务。
+                                                    编写完脚本后，使用 qsub 命令提交脚本，在 shell下输入：</p>
+
+                                                    <pre><code>$ qsub mytask
+                                                    </code></pre>
+
+                                                    <p>后敲回车。</p>
+                                                    <p>系统会输出一个任务标识符：sequence-number.servername，如 220.cnode01。sequence-number是任务编号，后面需要用这个号查看任务的执行状态，servername
+                                                        是 pbs server的名称。此外，在指定的输出文件路径内会有输出文件建立。任务提交后请关注任务状态，如有异常及时查阅＊.err文件。</p>
+
+
+
+                                                        <h3><a id="task-manager" class="anchor" href="#task-manager" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. 任务查看及管理</h3>
+                                                            <p>任务提交后，用户如果要知道任务的当前运行状态，可以通过 qstat 命令+任务标识符查询。</p>
+
+                                                            <p>任务的状态如下：</p>
+                                                            <pre><code>* B 只用于任务向量，表示任务向量已经开始执行
+                                                                * E 任务在运行后退出
+                                                                * H 任务被服务器或用户或者管理员阻塞
+                                                                * Q 任务正在排队中，等待被调度运行
+                                                                * R 任务正在运行
+                                                                * S 任务被服务器挂起，由于一个更高优先级的任务需要当前任务的资源
+                                                                * T 任务被转移到其它执行节点了
+                                                                * U 由于服务器繁忙，任务被挂起
+                                                                * W 任务在等待它所请求的执行时间的到来(qsub -a)
+                                                                * X 只用于子任务，表示子任务完成
+                                                            </code></pre>
+                                                            <p>取消删除任务</p>
+                                                            <pre><code>qdel 93.node1
+                                                            </code></pre>
+
+
+                                                            <h3><a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>6. 支持</h3>
+
+                                                            <p>Having trouble with Coding or Task Management? Check out the documentation and website on the top of this note or contact <a href="mailto:docurdt@sjtu.edu.cn">with me</a> and I’ll help you sort it out.</p>
+
+
+                                                            </div>
+                                                            <div class="mdl-cell mdl-cell--2-col"></div>
+                                                        </div>
+
+                                                        <footer class="mdl-mini-footer">
+                                                            <div class="mdl-mini-footer__left-section">
+                                                                <div class="mdl-logo">Eric's blog</div>
+                                                                <ul class="mdl-mini-footer__link-list">
+                                                                    <li><a href="#">Help</a></li>
+                                                                    <li><a href="#">Privacy & Terms</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </footer>
+
+                                                    </main>
+                                                </div>
