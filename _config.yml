@@ -42,4 +42,4 @@ highlighter: null #pygments
 lsi: false
 safe: false
 
-theme: jekyll-theme-modernist
+theme: jekyll-theme-midnight
