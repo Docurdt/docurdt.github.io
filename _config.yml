@@ -1,5 +1,5 @@
-title: Midnight theme
-description: Midnight is a theme for GitHub Pages.
-show_downloads: true
+title: Docurdt's Githublog
+description: Technical notes and personal experience will be shared.
+show_downloads: false
 google_analytics:
 theme: jekyll-theme-midnight
