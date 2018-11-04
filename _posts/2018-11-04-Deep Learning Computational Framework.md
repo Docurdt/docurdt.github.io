@@ -7,4 +7,4 @@ author: Docurdt
 
 _yay_
 
-[back](./)
+[back](../)

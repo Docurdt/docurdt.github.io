@@ -9,4 +9,4 @@ As the scale of data size and the complexity of the deep learning network archit
 
 _yay_
 
-[back](./)
+[back](../)
