@@ -1,5 +1,6 @@
 ---
-layout: default
+layout: post
+author: Docurdt
 ---
 
 ## Welcome to another page
