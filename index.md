@@ -4,8 +4,8 @@ layout: default
 
 # Deep learning related:
 
-1. [Hardwares for Deeplearning](./hardware_dl.html).
-2. [Platforms of Deeplearning](./platform_dl.html).
-3. [Cloud Platforms for Deeplearning](./cplat_dl.html)
+1. [Hardwares for Deep Learning](./_post/hardware_dl.html).
+2. [Platforms of Deep Learning](./_post/platform_dl.html).
+3. [Cloud Platforms for Deep Learning](./_post/cplat_dl.html)
 
 # Bioinformatics related:
