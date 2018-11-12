@@ -1,4 +1,3 @@
-# The way to deep learning with AMD GPU on Mac OS.
 Thanks to the Fabrice's blog [Deep Learning on a Mac with AMD GPU](https://medium.com/@danbrice.datascience/deep-learning-on-a-mac-with-amd-gpu-4be1f18944a)
 
 
