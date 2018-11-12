@@ -1,7 +1,7 @@
 Thanks to the Fabrice's blog [Deep Learning on a Mac with AMD GPU](https://medium.com/@danbrice.datascience/deep-learning-on-a-mac-with-amd-gpu-4be1f18944a)
 
 
-## The elegant solution for Deep Learning --- PlaidML
+## The elegant solution for Deep Learning --- [PlaidML](https://vertexai-plaidml.readthedocs-hosted.com/en/latest/installing.html)
 
 Mainstream deep learning frameworks, such as Tensorflow, PyTorch or Caffe 2, are not so friendly for Mac OS, especially for the AMD based Mac series.
 
