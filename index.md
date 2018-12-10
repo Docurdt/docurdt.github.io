@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+![Research Interests](assets/images/Research_interests.png)
 I am a PhD student in Bioinformatics at Biomedicine Discovery Institute of Monash University, who are focusing on tackling the biological challenge problems with large-scale heterogeneous data using machine learning algorithms. My research topics include fundamental biological researches of DNA/RNA/Protein sequence analysis and the application of biomedicine, such as Drug Design and Discovery, Precision Medicine, and Image Processing. My research interests for the machine learning include deep learning, transfer learning, reinforcement learning etc.
 
 ## Publication
@@ -16,7 +17,7 @@ ings in Bioinformatics (A Journal, IF: 5.134, Citation: 30, Webserver User: 209)
 
 ## Latest Posts
 
-[Go to the post list](blog.html)
+- [Go to the post list](blog.html)
 
 ## Contact
 - Email: Yanan DOT wang1 AT monash DOT edu
