@@ -19,5 +19,14 @@ ings in Bioinformatics (A Journal, IF: 5.134, Citation: 30, Webserver User: 209)
 ## Latest Posts
 - [Go to the post list](blog.html)
 
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+      <p>{{ post.excerpt }}</p>
+    </li>
+  {% endfor %}
+</ul>
+
 ## Contact
 - Email: Yanan DOT wang1 AT monash DOT edu
