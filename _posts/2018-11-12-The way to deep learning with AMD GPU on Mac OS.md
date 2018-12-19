@@ -3,6 +3,7 @@ layout: post
 author: Docurdt
 date: 2018-11-12
 ---
+Elegant way to use deep learning on Mac OS.
 
 Thanks to the Fabrice's blog [Deep Learning on a Mac with AMD GPU](https://medium.com/@danbrice.datascience/deep-learning-on-a-mac-with-amd-gpu-4be1f18944a)
 
