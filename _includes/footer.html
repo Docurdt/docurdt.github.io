@@ -1,43 +1,37 @@
 <!--
-<footer class="page-footer {{ site.css }} darken-2">
-    <div class="container">
-        <div class="row">
-            
-            <div class="col l3 m6 s12">
-                <h5 class="white-text">social-links</h5>
-                <ul>
-                    <li><a class="grey-text text-lighten-3" href="http://facebook.com/xSF.AzraeL/" target="_blank"><i class="mdi-social-person-add"></i> Facebook</a>
-                    </li>
-                    <li><a class="grey-text text-lighten-3" href="https://plus.google.com/u/0/114363400342894379257/posts" target="_blank"><i class="mdi-social-plus-one"></i> Google+</a>
-                    </li>
-                    <li><a class="grey-text text-lighten-3" href="http://github.com/naveenshaji/" target="_blank"><i class="mdi-notification-adb"></i> GitHub</a>
-                    </li>
-                </ul>
-            </div>
-                       
-            <div class="col l3 m6 s12">
-            <h5 class="white-text">where-i-live</h5>
-            <p class="grey-text text-lighten-4">TC 11/1827<br>West Cliff Gardens 35<br>Kowdiar, Trivandrum<br>&nbsp;</p>
-            </div>
-            
-            <div class="col l3 m6 s12">
-                <h5 class="white-text">contact-me</h5>
-                <p class="grey-text text-lighten-4">+91-9496-74-7070<br>naveen@pixelblenders.com<br>xsf.azrael@gmail.com</p>
-            </div>
+  The Footer
+-->
 
-                                               
-            <div class="col l3 m6 s12">
-                <h5 class="white-text">naveenshaji</h5>
-                <p class="grey-text text-lighten-4">Converting caffeine to code since 1997. I love web design. xoxo.</p>
-            </div>
-
-
-        </div>
+<footer class="d-flex w-100 justify-content-center">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="footer-left">
+      <p class="mb-0">
+        © {{ 'now' | date: "%Y" }}
+        <a href="{{ site.social.links[0] }}">{{ site.social.name }}</a>.
+        {% if site.data.locales[lang].copyright.brief %}
+        <span data-toggle="tooltip" data-placement="top"
+          title="{{ site.data.locales[lang].copyright.verbose }}">{{ site.data.locales[lang].copyright.brief }}</span>
+        {% endif %}
+      </p>
     </div>
-    <div class="footer-copyright">
-        <div class="container">
-            © 2015 Naveen Shaji
-            <a class="grey-text text-lighten-4 right" href="http://pixelblenders.com/" target="_blank">PixelBlenders</a>
-        </div>
+
+    <div class="footer-right">
+      <p class="mb-0">
+        {% capture _platform %}
+          <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>
+        {% endcapture %}
+
+        {% capture _theme %}
+          <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a>
+        {% endcapture %}
+
+        {{ site.data.locales[lang].meta
+          | default: 'Powered by :PLATFORM with :THEME theme.'
+          | replace: ':PLATFORM', _platform | replace: ':THEME', _theme
+        }}
+
+      </p>
     </div>
-</footer>-->
+
+  </div> <!-- div.d-flex -->
+</footer>

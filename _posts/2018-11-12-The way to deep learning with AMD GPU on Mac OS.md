@@ -1,9 +1,11 @@
 ---
-layout: post
-author: Docurdt
-date: 2018-11-12
+title: Elegant way to use deep learning on Mac OS
+date: 2018-11-12 8:38:09 +1100
+categories: [Research, Deep learning]
+tags: [computational configuration]     # TAG names should always be lowercase
 ---
-Elegant way to use deep learning on Mac OS.
+
+# Elegant way to use deep learning on Mac OS.
 
 Thanks to the Fabrice's blog [Deep Learning on a Mac with AMD GPU](https://medium.com/@danbrice.datascience/deep-learning-on-a-mac-with-amd-gpu-4be1f18944a)
 
@@ -16,7 +18,7 @@ Among the solutions introduced in Fabrice's blog, I think PlaidML is the most el
 
 The source code is a beginner quick guide based on PlaidML + Keras:
 
-```
+``` python
 #import the following two lines first!
 import plaidml.keras
 plaidml.keras.install_backend()
@@ -72,7 +74,4 @@ model.fit(X_train, Y_train,
 score = model.evaluate(X_test, Y_test, verbose=0)
 
 print(score)
-
-
 ```
-[back](../../../blog.html)
