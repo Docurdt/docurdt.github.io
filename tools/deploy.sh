@@ -126,7 +126,7 @@ main() {
   fi
 
   setup_gh
-  backup
+  #backup
   flush
   deploy
 }
