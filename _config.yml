@@ -26,8 +26,8 @@ description: >-                        # used by seo meta and the atom feed
   Yanan, portfolio, publication, academia.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-host: 0.0.0.0
-url: 'http://docurdt.github.io'
+#host: 0.0.0.0
+url: 'https://docurdt.github.io'
 
 github:
   username: docurdt             # change to your github username
