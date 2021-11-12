@@ -1,6 +1,6 @@
 ---
 title: Some ideas about gene essentiality prediction and graph neural network
-date: 2021-11-11 18:38:09 +1100
+date: 2021-11-11 18:38:09 +1000
 categories: [Research, Sequence analysis]
 tags: [gene essentiality]     # TAG names should always be lowercase
 ---

@@ -1,6 +1,6 @@
 ---
 title: Elegant way to use deep learning on Mac OS
-date: 2018-11-12 8:38:09 +1100
+date: 2018-11-12 8:38:09 +1000
 categories: [Research, Deep learning]
 tags: [computational configuration]     # TAG names should always be lowercase
 ---
