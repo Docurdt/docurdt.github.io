@@ -4,7 +4,7 @@
   <id>http://0.0.0.0:4000/</id>
   <title>Yanan's  Blog</title>
   <subtitle>Yanan, portfolio, publication, academia.</subtitle>
-  <updated>2021-11-12T13:30:09+11:00</updated>
+  <updated>2021-11-12T13:51:07+11:00</updated>
   <author>
     <name>Yanan</name>
     <uri>http://0.0.0.0:4000/</uri>
@@ -69,7 +69,7 @@ The feasibility of predicting GE using graph neural networks.
     <link href="http://0.0.0.0:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/" rel="alternate" type="text/html" title="Elegant way to use deep learning on Mac OS" />
     <published>2018-11-12T08:38:09+11:00</published>
   
-    <updated>2018-12-19T22:20:39+11:00</updated>
+    <updated>2021-11-12T13:34:46+11:00</updated>
   
     <id>http://0.0.0.0:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/</id>
     <content src="http://0.0.0.0:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/" />
