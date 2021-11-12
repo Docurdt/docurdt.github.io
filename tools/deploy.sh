@@ -82,6 +82,7 @@ setup_gh() {
 }
 
 backup() {
+  ls
   mv "$SITE_DIR" "$_backup_dir"
   mv .git "$_backup_dir"
 
