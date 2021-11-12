@@ -117,7 +117,6 @@ deploy() {
 
 main() {
   init
-  git checkout -f "$PAGES_BRANCH"
   build
   test
   resume_site_dir

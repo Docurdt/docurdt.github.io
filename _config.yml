@@ -49,13 +49,13 @@ social:
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
 
-google_site_verification: google_meta_tag_verification # change to your verification string
+# <meta name="google-site-verification" content="lBWH5q3W_JCp6DHUMmwTw-dGGaC-KeY5NI9VF4AZpvg" />
+google_site_verification: "lBWH5q3W_JCp6DHUMmwTw-dGGaC-KeY5NI9VF4AZpvg" # change to your verification string
 
 # ↑ --------------------------
 
-
 google_analytics:
-  id: ''              # fill in your Google Analytics ID
+  id: 'UA-128607473-1'              # fill in your Google Analytics ID
   # Google Analytics pageviews report settings
   pv:
     proxy_endpoint:   # fill in the Google Analytics superProxy endpoint of Google App Engine
@@ -82,7 +82,7 @@ theme_mode:   dark # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: #'kurtsketch.gif'
+avatar: 'kurtsketch.gif'
 
 # boolean type, the global switch for ToC in posts.
 toc: true
