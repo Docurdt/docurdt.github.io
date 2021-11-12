@@ -80,9 +80,9 @@ setup_gh() {
     git checkout -f "$PAGES_BRANCH"
   fi
 }
-
+#"$SITE_DIR"/
 backup() {
-  mv "$SITE_DIR"/\* "$_backup_dir"/
+  mv ./* "$_backup_dir"/
   mv .git "$_backup_dir"
 
   # When adding custom domain from Github website,
@@ -97,7 +97,7 @@ flush() {
   rm -rf .[^.] .??*
 
   shopt -s dotglob nullglob
-  mv "$_backup_dir"/* .
+  mv "$_backup_dir"/* ./
 }
 
 deploy() {
@@ -126,7 +126,7 @@ main() {
   fi
 
   setup_gh
-  #backup
+  backup
   flush
   deploy
 }
