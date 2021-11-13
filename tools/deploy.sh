@@ -79,6 +79,10 @@ setup_gh() {
     git checkout -b "$PAGES_BRANCH"
   else
     echo "PAGES_BRANCH has been set, no need to checkout"
+    git config --global user.name "GitHub Actions"
+    git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+    git update-ref -d HEAD
     git add -A
     git commit -m "[Automation] Site update No.${GITHUB_RUN_NUMBER} when set up gh"
     git push
