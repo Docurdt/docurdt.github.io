@@ -78,8 +78,8 @@ setup_gh() {
     _no_pages_branch=true
     git checkout -b "$PAGES_BRANCH"
   else
-    echo "force to checkout"
-    git checkout -f "$PAGES_BRANCH"
+    echo "PAGES_BRANCH has been set, no need to checkout"
+    # git checkout -f "$PAGES_BRANCH"
   fi
 }
 
@@ -122,16 +122,21 @@ deploy() {
 main() {
   init
   build
+  ls
   test
+  ls
   resume_site_dir
-
+  ls
   if $_opt_dry_run; then
     exit 0
   fi
-
+  ls
   setup_gh
+  ls
   backup
-  flush
+  ls
+  #flush
+  # ls
   deploy
 }
 
