@@ -79,7 +79,10 @@ setup_gh() {
     git checkout -b "$PAGES_BRANCH"
   else
     echo "PAGES_BRANCH has been set, no need to checkout"
-    # git checkout -f "$PAGES_BRANCH"
+    git add -A
+    git commit -m "[Automation] Site update No.${GITHUB_RUN_NUMBER} when set up gh"
+    git push
+    git checkout "$PAGES_BRANCH"
   fi
 }
 
@@ -136,7 +139,7 @@ main() {
   echo ">>>>>>>>>>backup<<<<<<<<<<<<<<"
   backup
   pwd
-  #flush
+  flush
   # ls
   echo ">>>>>>>>>>Deploy<<<<<<<<<<<<<<"
   deploy
