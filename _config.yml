@@ -51,7 +51,7 @@ social:
 
 # <meta name="google-site-verification" content="lBWH5q3W_JCp6DHUMmwTw-dGGaC-KeY5NI9VF4AZpvg" />
 # <meta name="google-site-verification" content="lBWH5q3W_JCp6DHUMmwTw-dGGaC-KeY5NI9VF4AZpvg" />
-google_site_verification: lBWH5q3W_JCp6DHUMmwTw-dGGaC-KeY5NI9VF4AZpvg # change to your verification string
+google_site_verification: 'lBWH5q3W_JCp6DHUMmwTw-dGGaC-KeY5NI9VF4AZpvg' # change to your verification string
 
 # ↑ --------------------------
 
@@ -73,7 +73,7 @@ google_analytics:
 #     light  - Use the light color scheme
 #     dark   - Use the dark color scheme
 #
-theme_mode:   dark # [light|dark]
+theme_mode:   # [light|dark]
 
 # The CDN endpoint for images.
 # Notice that once it is assigned, the CDN url
@@ -129,7 +129,7 @@ defaults:
     scope:
       path: _drafts
     values:
-      comments: false
+      comments: true
   -
     scope:
       path: ''
