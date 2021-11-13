@@ -79,7 +79,7 @@ setup_gh() {
     git checkout -b "$PAGES_BRANCH"
   else
     echo "force to checkout"
-    git checkout "$PAGES_BRANCH"
+    git checkout -f "$PAGES_BRANCH"
   fi
 }
 
