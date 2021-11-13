@@ -82,7 +82,7 @@ setup_gh() {
 }
 #"$SITE_DIR"/
 backup() {
-  mv ./* "$_backup_dir"/
+  mv "$SITE_DIR"/* "$_backup_dir"/
   mv .git "$_backup_dir"
 
   # When adding custom domain from Github website,
@@ -111,7 +111,7 @@ deploy() {
   if $_no_pages_branch; then
     git push -u origin "$PAGES_BRANCH"
   else
-    git push -f
+    git push -f origin "$PAGES_BRANCH"
   fi
 }
 
