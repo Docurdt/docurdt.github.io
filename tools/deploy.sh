@@ -77,12 +77,12 @@ setup_gh() {
     _no_pages_branch=true
     git checkout -b "$PAGES_BRANCH"
   else
-    git checkout -f "$PAGES_BRANCH"
+    git checkout "$PAGES_BRANCH"
   fi
 }
-#"$SITE_DIR"/
+
 backup() {
-  mv "$SITE_DIR"/* "$_backup_dir"/
+  mv "$SITE_DIR"/* "$_backup_dir"
   mv .git "$_backup_dir"
 
   # When adding custom domain from Github website,
@@ -97,7 +97,7 @@ flush() {
   rm -rf .[^.] .??*
 
   shopt -s dotglob nullglob
-  mv "$_backup_dir"/* ./
+  mv "$_backup_dir"/* .
 }
 
 deploy() {
@@ -111,7 +111,7 @@ deploy() {
   if $_no_pages_branch; then
     git push -u origin "$PAGES_BRANCH"
   else
-    git push -f origin "$PAGES_BRANCH"
+    git push -f
   fi
 }
 
