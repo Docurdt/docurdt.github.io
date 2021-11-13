@@ -84,8 +84,6 @@ setup_gh() {
 }
 
 backup() {
-  pwd
-  ls
   mv "$SITE_DIR"/* "$_backup_dir"
   mv .git "$_backup_dir"
 
@@ -120,24 +118,29 @@ deploy() {
 }
 
 main() {
+  echo ">>>>>>>>>>Initializing<<<<<<<<<<<<<<"
   init
+  echo ">>>>>>>>>>Build<<<<<<<<<<<<<<"
   build
-  ls
+  echo ">>>>>>>>>>test<<<<<<<<<<<<<<"
   test
-  ls
+  pwd
+  echo ">>>>>>>>>>Resume<<<<<<<<<<<<<<"
   resume_site_dir
-  ls
   if $_opt_dry_run; then
     exit 0
   fi
-  ls
+  echo ">>>>>>>>>>setup_gh<<<<<<<<<<<<<<"
   setup_gh
-  ls
+  pwd
+  echo ">>>>>>>>>>backup<<<<<<<<<<<<<<"
   backup
-  ls
+  pwd
   #flush
   # ls
+  echo ">>>>>>>>>>Deploy<<<<<<<<<<<<<<"
   deploy
+  pwd
 }
 
 while (($#)); do
