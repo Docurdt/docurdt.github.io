@@ -65,6 +65,7 @@ test() {
 
 resume_site_dir() {
   if [[ -n $_baseurl ]]; then
+    echo "site resume"
     # Move the site file to the regular directory '_site'
     mv "$SITE_DIR$_baseurl" "${SITE_DIR}-rename"
     rm -rf "$SITE_DIR"
@@ -77,11 +78,14 @@ setup_gh() {
     _no_pages_branch=true
     git checkout -b "$PAGES_BRANCH"
   else
+    echo "force to checkout"
     git checkout "$PAGES_BRANCH"
   fi
 }
 
 backup() {
+  pwd
+  ls
   mv "$SITE_DIR"/* "$_backup_dir"
   mv .git "$_backup_dir"
 
