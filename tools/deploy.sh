@@ -82,8 +82,11 @@ setup_gh() {
     git config --global user.name "GitHub Actions"
     git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-    git checkout -d "$PAGES_BRANCH"
-    git checkout -b "$PAGES_BRANCH"
+    git update-ref -d HEAD
+    git add -A
+    git commit -m "[Automation] Site update No.${GITHUB_RUN_NUMBER} when set up gh"
+    git push -f
+    git checkout "$PAGES_BRANCH"
   fi
 }
 
