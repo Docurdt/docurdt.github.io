@@ -1,9 +1,8 @@
 ---
 title: About
 icon: fas fa-info-circle
-order: 4
+order: 1
 ---
-
 I am currently a PhD student at Biomedicine Discovery Institute of Monash University, majoring in **Machine learning and Bioinformatics**.
 My research topics include biological problems of **Cancer image analysis** and **DNA/RNA/Protein sequence analysis**, which are more challenges to application in terms of high-dimensional with small size datasets, unpredictable heterogeneous data, lack of annotations, etc.
 I am keen to apply machine learning algorithms to the data of reality to solve challenging analysis tasks.
