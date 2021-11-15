@@ -122,7 +122,7 @@ deploy() {
   if $_no_pages_branch; then
     git push -u origin "$PAGES_BRANCH"
   else
-    git push --set-upstream origin gh-pages
+    git push -f --set-upstream origin gh-pages
   fi
 }
 
