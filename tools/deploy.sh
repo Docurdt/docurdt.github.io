@@ -45,10 +45,12 @@ init() {
 }
 
 backup() {
-  echo "backup"
+  echo ">>>>>>>>>>>>>>>>before backup<<<<<<<<<<<<<<<<<<<<<<<<<"
+  ls
   mv _site/* "$_backup_dir"
   mv .git "$_backup_dir"
-
+  ls
+  echo ">>>>>>>>>>>>>>>>after backup <<<<<<<<<<<<<<<<<<<<<<<<<"
   # When adding custom domain from Github website,
   # the CANME only exist on `gh-pages` branch
   if [[ -f CNAME ]]; then
