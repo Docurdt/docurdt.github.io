@@ -119,7 +119,7 @@ deploy() {
   if $_no_pages_branch; then
     git push -u origin "$PAGES_BRANCH"
   else
-    git push -u origin "$PAGES_BRANCH"
+    git push -f origin "$PAGES_BRANCH"
   fi
 }
 
