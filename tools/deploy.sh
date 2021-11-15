@@ -35,7 +35,7 @@ init() {
     git update-ref -d HEAD
     git add -A
     git commit -m "[Automation] Site update No.${GITHUB_RUN_NUMBER}"
-    git push -u
+    git push -f
     git checkout "$PAGES_BRANCH"
     ls
   fi
