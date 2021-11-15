@@ -38,7 +38,7 @@ init() {
     git push -f origin master
     echo ">>>>>>>>>>>>>>>>before checkout <<<<<<<<<<<<<<<<<<<<<<<<<"
     ls
-    git push -u origin "$PAGES_BRANCH"
+    git push -f origin "$PAGES_BRANCH"
     git checkout "$PAGES_BRANCH"
 
     echo ">>>>>>>>>>>>>>>>after checkout <<<<<<<<<<<<<<<<<<<<<<<<<"
