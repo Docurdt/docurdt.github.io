@@ -84,7 +84,9 @@ setup_gh() {
     # git add -A
     # git commit -m "[Automation] Site update No.${GITHUB_RUN_NUMBER}"
     # git stash
+    echo "Checkout -B <<<<<<<<<<<<<<<<<<<<"
     git checkout -B "$PAGES_BRANCH" master
+    echo ">>>>>>>>>>>>>>>>>>>>>>Checkout -B <<<<<<<<<<<<<<<<<<<<"
     # git stash pop
 
   fi
@@ -120,7 +122,7 @@ deploy() {
   if $_no_pages_branch; then
     git push -u origin "$PAGES_BRANCH"
   else
-    git push -f
+    git push --set-upstream origin gh-pages
   fi
 }
 
