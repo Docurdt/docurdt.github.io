@@ -38,7 +38,6 @@ init() {
     git push -f origin master
     echo ">>>>>>>>>>>>>>>>before checkout <<<<<<<<<<<<<<<<<<<<<<<<<"
     ls
-    git push -f origin "$PAGES_BRANCH"
     git checkout "$PAGES_BRANCH"
 
     echo ">>>>>>>>>>>>>>>>after checkout <<<<<<<<<<<<<<<<<<<<<<<<<"
@@ -48,23 +47,23 @@ init() {
 
 backup() {
   echo ">>>>>>>>>>>>>>>>before backup<<<<<<<<<<<<<<<<<<<<<<<<<"
-  ls
-  mv _site/* "$_backup_dir"
-  mv .git "$_backup_dir"
-
-  # When adding custom domain from Github website,
-  # the CANME only exist on `gh-pages` branch
-  if [[ -f CNAME ]]; then
-    mv CNAME "$_backup_dir"
-  fi
+  # ls
+  # mv _site/* "$_backup_dir"
+  # mv .git "$_backup_dir"
+  #
+  # # When adding custom domain from Github website,
+  # # the CANME only exist on `gh-pages` branch
+  # if [[ -f CNAME ]]; then
+  #   mv CNAME "$_backup_dir"
+  # fi
 }
 
 flush() {
-  rm -rf ./*
-  rm -rf .[^.] .??*
-
-  shopt -s dotglob nullglob
-  mv "$_backup_dir"/* .
+  # rm -rf ./*
+  # rm -rf .[^.] .??*
+  #
+  # shopt -s dotglob nullglob
+  # mv "$_backup_dir"/* .
   echo ">>>>>>>>>>>>>>>>after flush <<<<<<<<<<<<<<<<<<<<<<<<<"
   ls
 }
