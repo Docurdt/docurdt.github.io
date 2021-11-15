@@ -86,7 +86,7 @@ setup_gh() {
     git push -f
 
     git checkout "$PAGES_BRANCH"
-    git push -u origin "$PAGES_BRANCH"
+    git push -f master "$PAGES_BRANCH"
   fi
 }
 
