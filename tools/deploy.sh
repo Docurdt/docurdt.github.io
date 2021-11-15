@@ -87,7 +87,7 @@ setup_gh() {
     git branch -av
     git checkout "$PAGES_BRANCH"
     git branch -av
-    git merge origin #"$PAGES_BRANCH"
+    git merge master #"$PAGES_BRANCH"
   fi
 }
 
