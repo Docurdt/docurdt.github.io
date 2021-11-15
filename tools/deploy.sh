@@ -84,7 +84,7 @@ setup_gh() {
     # git add -A
     # git commit -m "[Automation] Site update No.${GITHUB_RUN_NUMBER}"
     # git stash
-    git checkout "$PAGES_BRANCH"
+    git checkout -B "$PAGES_BRANCH"
     # git stash pop
 
   fi
