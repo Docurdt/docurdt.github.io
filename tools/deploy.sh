@@ -36,6 +36,7 @@ init() {
     # git add -A
     # git commit -m "[Automation] Site update No.${GITHUB_RUN_NUMBER}"
     # git push -f
+    ls
     git checkout "$PAGES_BRANCH"
     ls
   fi
