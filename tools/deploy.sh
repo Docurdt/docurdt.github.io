@@ -36,13 +36,16 @@ init() {
     # git add -A
     # git commit -m "[Automation] Site update No.${GITHUB_RUN_NUMBER}"
     # git push -f
+    echo ">>>>>>>>>>>>>>>>before checkout <<<<<<<<<<<<<<<<<<<<<<<<<"
     ls
     git checkout "$PAGES_BRANCH"
+    echo ">>>>>>>>>>>>>>>>after checkout <<<<<<<<<<<<<<<<<<<<<<<<<"
     ls
   fi
 }
 
 backup() {
+  echo "backup"
   mv _site/* "$_backup_dir"
   mv .git "$_backup_dir"
 
@@ -78,10 +81,10 @@ deploy() {
 
 main() {
   init
-  deploy
+  # deploy
   backup
   flush
-  # deploy
+  deploy
 }
 
 main
