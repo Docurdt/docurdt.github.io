@@ -84,8 +84,8 @@ setup_gh() {
     git add -A
     git commit -m "[Automation] Site update No.${GITHUB_RUN_NUMBER}"
     git push -f
-    git push -f origin "$PAGES_BRANCH"
     git checkout "$PAGES_BRANCH"
+    git push -f origin "$PAGES_BRANCH"
   fi
 }
 

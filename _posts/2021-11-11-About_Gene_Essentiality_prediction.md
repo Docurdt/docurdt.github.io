@@ -10,7 +10,6 @@ tags: [gene essentiality]     # TAG names should always be lowercase
 dsdsd
 # How to annotate it?
 
-dsdsdsds
 # Related publication resources.
 
 # Previous studies of predicting GE.
