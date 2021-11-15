@@ -83,11 +83,10 @@ setup_gh() {
     git update-ref -d HEAD
     git add -A
     git commit -m "[Automation] Site update No.${GITHUB_RUN_NUMBER}"
-    git push -f
-    git branch -av
+    git stash
     git checkout "$PAGES_BRANCH"
-    git branch -av
-    git pull master "$PAGES_BRANCH"
+    git stash pop
+
   fi
 }
 
