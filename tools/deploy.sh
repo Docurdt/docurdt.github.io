@@ -134,9 +134,9 @@ main() {
   fi
 
   setup_gh
-  # backup
-  # flush
   deploy
+  backup
+  flush
 }
 
 while (($#)); do
