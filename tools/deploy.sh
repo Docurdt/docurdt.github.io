@@ -77,6 +77,14 @@ setup_gh() {
     _no_pages_branch=true
     git checkout -b "$PAGES_BRANCH"
   else
+    git config --global user.name "GitHub Actions"
+    git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+    git update-ref -d HEAD
+    git add -A
+    git commit -m "[Automation] Site update No.${GITHUB_RUN_NUMBER}"
+    git push -f origin master
+
     git checkout "$PAGES_BRANCH"
   fi
 }
@@ -126,8 +134,8 @@ main() {
   fi
 
   setup_gh
-  backup
-  flush
+  # backup
+  # flush
   deploy
 }
 
