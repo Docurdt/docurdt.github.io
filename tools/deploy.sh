@@ -86,6 +86,7 @@ setup_gh() {
     git push -f
 
     git checkout "$PAGES_BRANCH"
+    git push -u origin "$PAGES_BRANCH"
   fi
 }
 
@@ -119,7 +120,7 @@ deploy() {
   if $_no_pages_branch; then
     git push -u origin "$PAGES_BRANCH"
   else
-    git push -f origin "$PAGES_BRANCH"
+    git push -f
   fi
 }
 
@@ -134,9 +135,9 @@ main() {
   fi
 
   setup_gh
-  deploy
   backup
   flush
+  deploy
 }
 
 while (($#)); do
