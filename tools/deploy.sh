@@ -78,9 +78,10 @@ deploy() {
 
 main() {
   init
+  deploy
   backup
   flush
-  deploy
+  # deploy
 }
 
 main
