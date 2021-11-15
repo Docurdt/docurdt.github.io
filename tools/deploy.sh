@@ -29,16 +29,18 @@ init() {
     _no_branch=true
     git checkout -b "$PAGES_BRANCH"
   else
-    # git config --global user.name "GitHub Actions"
-    # git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-    #
-    # git update-ref -d HEAD
-    # git add -A
-    # git commit -m "[Automation] Site update No.${GITHUB_RUN_NUMBER}"
-    # git push -f
+    git config --global user.name "GitHub Actions"
+    git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+    git update-ref -d HEAD
+    git add -A
+    git commit -m "[Automation] Site update No.${GITHUB_RUN_NUMBER}"
+    git push -f origin master
     echo ">>>>>>>>>>>>>>>>before checkout <<<<<<<<<<<<<<<<<<<<<<<<<"
     ls
+    git push -u origin "$PAGES_BRANCH"
     git checkout "$PAGES_BRANCH"
+
     echo ">>>>>>>>>>>>>>>>after checkout <<<<<<<<<<<<<<<<<<<<<<<<<"
     ls
   fi
@@ -49,8 +51,7 @@ backup() {
   ls
   mv _site/* "$_backup_dir"
   mv .git "$_backup_dir"
-  ls
-  echo ">>>>>>>>>>>>>>>>after backup <<<<<<<<<<<<<<<<<<<<<<<<<"
+
   # When adding custom domain from Github website,
   # the CANME only exist on `gh-pages` branch
   if [[ -f CNAME ]]; then
@@ -64,6 +65,8 @@ flush() {
 
   shopt -s dotglob nullglob
   mv "$_backup_dir"/* .
+  echo ">>>>>>>>>>>>>>>>after flush <<<<<<<<<<<<<<<<<<<<<<<<<"
+  ls
 }
 
 deploy() {
