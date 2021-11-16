@@ -1,0 +1,118 @@
+I"�<h2 id="introduction">Introduction</h2>
+
+<p>Systematic reviews serve many critical roles.
+They can provide syntheses of the state of knowledge in a field, from which future research priorities can be identified; they can address questions that otherwise could not be answered by individual studies; they can identify problems in primary research that should be rectified in future studies; and they can generate or evaluate theories about how or why phenomena occur.
+To ensure a systematic review is valuable to users, authors should prepare a transparent, complete, and accurate account of why the review was done, what they did (such as how studies were identified and selected) and what they found (such as characteristics of contributing studies and results of meta-analyses).</p>
+
+<p>Up-to-date reporting guidance facilitates authors achieving this.
+The Preferred Reporting Items for Systematic reviews and Meta-Analyses (<a href="http://prisma-statement.org/">PRISMA</a>) statement, published in 2009, was designed to help systematic reviewers transparently report why the review was done, what the authors did, and what they found.
+The PRISMA 2020 statement replaces the 2009 statement, which consists of a 27-item checklist, an expanded checklist that details reporting recommendations for each item, the PRISMA 2020 abstract checklist, and revised flow diagrams for original and updated reviews.
+The authors are encouraged to refer to PRISMA 2020 early in the writing process.</p>
+
+<h2 id="the-core-of-prisma">The core of PRISMA</h2>
+<p>The core of PRISMA consists of three main parts, including <strong>(1) Abstract checklist</strong>, <strong>(2) Main checklist and an expanded checklist</strong>, and <strong>(3) flow diagram of review progress</strong>.</p>
+
+<h3 id="table-1-prisma-2020-for-abstracts-checklist">Table 1. PRISMA 2020 for Abstracts checklist</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Section and topic</th>
+      <th style="text-align: center">Item number</th>
+      <th style="text-align: left">Checklist item</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Title</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td>Title</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: left">Identify the report as a systematic review.</td>
+    </tr>
+    <tr>
+      <td>Background</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td>Objectives</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: left">Provide an explicit statement of the main objective(s) <br /> or question(s) the review addresses.</td>
+    </tr>
+    <tr>
+      <td>Methods</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td>Eligibility criteria</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: left">Specify the inclusion and exclusion criteria for the <br /> review.</td>
+    </tr>
+    <tr>
+      <td>Information sources</td>
+      <td style="text-align: center">4</td>
+      <td style="text-align: left">Specify the information sources (e.g. databases, <br /> registers) used to identify studies and the date <br /> when each was last searched.</td>
+    </tr>
+    <tr>
+      <td>Risk of bias</td>
+      <td style="text-align: center">5</td>
+      <td style="text-align: left">Specify the methods used to assess risk of bias in the <br /> included studies.</td>
+    </tr>
+    <tr>
+      <td>Synthesis of results</td>
+      <td style="text-align: center">6</td>
+      <td style="text-align: left">Specify the methods used to present and <br /> synthesise results.</td>
+    </tr>
+    <tr>
+      <td>Results</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td>Included studies</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: left">Give the total number of included studies and <br /> participants and summarise relevant characteristics <br /> of studies.</td>
+    </tr>
+    <tr>
+      <td>Synthesis of results</td>
+      <td style="text-align: center">8</td>
+      <td style="text-align: left">Present results for main outcomes, preferably indicating <br /> the number of included studies and participants for <br /> each. If meta-analysis was done, report the <br /> summary estimate and confidence/credible <br />interval. If comparing groups, indicate the<br /> direction of the effect (i.e. which group is favoured).</td>
+    </tr>
+    <tr>
+      <td>Discussion</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td>Limitations of evidence</td>
+      <td style="text-align: center">9</td>
+      <td style="text-align: left">Provide a brief summary of the limitations of the evidence<br /> included in the review (e.g. study risk of bias,<br /> inconsistency and imprecision).</td>
+    </tr>
+    <tr>
+      <td>Interpretation</td>
+      <td style="text-align: center">10</td>
+      <td style="text-align: left">Provide a general interpretation of the results and <br /> important implications.</td>
+    </tr>
+    <tr>
+      <td>Other</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td>Funding</td>
+      <td style="text-align: center">11</td>
+      <td style="text-align: left">Specify the primary source of funding for the review.</td>
+    </tr>
+    <tr>
+      <td>Registration</td>
+      <td style="text-align: center">12</td>
+      <td style="text-align: left">Provide the register name and registration number.</td>
+    </tr>
+  </tbody>
+</table>
+:ET
