@@ -1,22 +1,18 @@
 ---
-title: Elegant way to use deep learning on Mac OS
+title: Elegant way of using deep learning on AMD Mac
 date: 2018-11-12 8:38:09 +1000
 categories: [Research, Deep learning]
 tags: [computational configuration]     # TAG names should always be lowercase
 ---
 
-# Elegant way to use deep learning on Mac OS.
+> Fabrice's blog [Deep Learning on a Mac with AMD GPU](https://medium.com/@danbrice.datascience/deep-learning-on-a-mac-with-amd-gpu-4be1f18944a)
 
-Thanks to the Fabrice's blog [Deep Learning on a Mac with AMD GPU](https://medium.com/@danbrice.datascience/deep-learning-on-a-mac-with-amd-gpu-4be1f18944a)
+## An elegant solution for Deep Learning --- [PlaidML](https://vertexai-plaidml.readthedocs-hosted.com/en/latest/installing.html)
 
-
-## The elegant solution for Deep Learning --- [PlaidML](https://vertexai-plaidml.readthedocs-hosted.com/en/latest/installing.html)
-
-Mainstream deep learning frameworks, such as Tensorflow, PyTorch or Caffe 2, are not so friendly for Mac OS, especially for the AMD based Mac series.
-
-Among the solutions introduced in Fabrice's blog, I think PlaidML is the most elegant one.
-
-The source code is a beginner quick guide based on PlaidML + Keras:
+Mainstream deep learning frameworks, such as Tensorflow, PyTorch, and Caffe 2, are not so friendly for AMD Mac.
+Among the solutions introduced in Fabrice's blog, PlaidML is an elegant one to me.
+The installation and configuration of PlaidML can be found in the documentation of [PlaidML](https://vertexai-plaidml.readthedocs-hosted.com/en/latest/installing.html).
+The source code shown below is a quick guide for beginner, which is based on PlaidML + Keras:
 
 ``` python
 #import the following two lines first!
