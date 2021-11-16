@@ -35,25 +35,25 @@ encoding: UTF-8
 
   <!-- <!-- Begin Jekyll SEO tag v2.7.1 -->
 <meta name="generator" content="Jekyll v4.2.1" />
-<meta property="og:title" content="Elegant way to use deep learning on Mac OS" />
+<meta property="og:title" content="Elegant way of using deep learning on AMD Mac" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="Elegant way to use deep learning on Mac OS." />
-<meta property="og:description" content="Elegant way to use deep learning on Mac OS." />
+<meta name="description" content="Fabrice’s blog Deep Learning on a Mac with AMD GPU" />
+<meta property="og:description" content="Fabrice’s blog Deep Learning on a Mac with AMD GPU" />
 <link rel="canonical" href="http://localhost:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/" />
 <meta property="og:url" content="http://localhost:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/" />
 <meta property="og:site_name" content="Yanan’s Blog" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2018-11-12T09:38:09+11:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Elegant way to use deep learning on Mac OS" />
+<meta property="twitter:title" content="Elegant way of using deep learning on AMD Mac" />
 <meta name="twitter:site" content="@docurdt" />
 <meta name="google-site-verification" content="lBWH5q3W_JCp6DHUMmwTw-dGGaC-KeY5NI9VF4AZpvg" />
 <script type="application/ld+json">
-{"headline":"Elegant way to use deep learning on Mac OS","description":"Elegant way to use deep learning on Mac OS.","datePublished":"2018-11-12T09:38:09+11:00","dateModified":"2021-11-12T18:35:46+11:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/"},"url":"http://localhost:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"headline":"Elegant way of using deep learning on AMD Mac","description":"Fabrice’s blog Deep Learning on a Mac with AMD GPU","datePublished":"2018-11-12T09:38:09+11:00","dateModified":"2021-11-16T11:32:11+11:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/"},"url":"http://localhost:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
  -->
 
-  <title>Elegant way to use deep learning on Mac OS | Yanan's  Blog
+  <title>Elegant way of using deep learning on AMD Mac | Yanan's  Blog
   </title>
 
   <!--
@@ -443,7 +443,7 @@ encoding: UTF-8
         
 
           
-            <span>Elegant way to use deep learning on Mac OS</span>
+            <span>Elegant way of using deep learning on AMD Mac</span>
           
 
         
@@ -523,7 +523,7 @@ encoding: UTF-8
 
     <div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
 
-      <h1 data-toc-skip>Elegant way to use deep learning on Mac OS</h1>
+      <h1 data-toc-skip>Elegant way of using deep learning on AMD Mac</h1>
 
       <div class="post-meta text-muted d-flex flex-column">
         <!-- Published date and author -->
@@ -573,8 +573,8 @@ encoding: UTF-8
   
     data-toggle="tooltip"
     data-placement="bottom"
-    title="Fri, Nov 12, 2021,  6:35 PM +1100"
-  >Nov 12<i class="unloaded">2021-11-12T18:35:46+11:00</i>
+    title="Tue, Nov 16, 2021, 11:32 AM +1100"
+  >Nov 16<i class="unloaded">2021-11-16T11:32:11+11:00</i>
 </span>
 
           </span>
@@ -600,7 +600,7 @@ encoding: UTF-8
 
 <!-- return element -->
 <span class="readtime" data-toggle="tooltip" data-placement="bottom"
-  title="285 words">1 min
+  title="284 words">1 min
      read</span>
 
 
@@ -615,17 +615,16 @@ encoding: UTF-8
 
         
 
-        <h1 id="elegant-way-to-use-deep-learning-on-mac-os">Elegant way to use deep learning on Mac OS.</h1>
+        <blockquote>
+  <p>Fabrice’s blog <a href="https://medium.com/@danbrice.datascience/deep-learning-on-a-mac-with-amd-gpu-4be1f18944a">Deep Learning on a Mac with AMD GPU</a></p>
+</blockquote>
 
-<p>Thanks to the Fabrice’s blog <a href="https://medium.com/@danbrice.datascience/deep-learning-on-a-mac-with-amd-gpu-4be1f18944a">Deep Learning on a Mac with AMD GPU</a></p>
+<h2 id="an-elegant-solution-for-deep-learning--plaidml">An elegant solution for Deep Learning — <a href="https://vertexai-plaidml.readthedocs-hosted.com/en/latest/installing.html">PlaidML</a></h2>
 
-<h2 id="the-elegant-solution-for-deep-learning--plaidml">The elegant solution for Deep Learning — <a href="https://vertexai-plaidml.readthedocs-hosted.com/en/latest/installing.html">PlaidML</a></h2>
-
-<p>Mainstream deep learning frameworks, such as Tensorflow, PyTorch or Caffe 2, are not so friendly for Mac OS, especially for the AMD based Mac series.</p>
-
-<p>Among the solutions introduced in Fabrice’s blog, I think PlaidML is the most elegant one.</p>
-
-<p>The source code is a beginner quick guide based on PlaidML + Keras:</p>
+<p>Mainstream deep learning frameworks, such as Tensorflow, PyTorch, and Caffe 2, are not so friendly for AMD Mac.
+Among the solutions introduced in Fabrice’s blog, PlaidML is an elegant one to me.
+The installation and configuration of PlaidML can be found in the documentation of <a href="https://vertexai-plaidml.readthedocs-hosted.com/en/latest/installing.html">PlaidML</a>.
+The source code shown below is a quick guide for beginner, which is based on PlaidML + Keras:</p>
 
 <div class="language-python highlighter-rouge"><div class="code-header">
         <span text-data="
@@ -800,19 +799,19 @@ encoding: UTF-8
 
     
       
-        <a href="https://twitter.com/intent/tweet?text=Elegant way to use deep learning on Mac OS - Yanan's  Blog&url=http://localhost:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/" data-toggle="tooltip" data-placement="top"
+        <a href="https://twitter.com/intent/tweet?text=Elegant way of using deep learning on AMD Mac - Yanan's  Blog&url=http://localhost:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/" data-toggle="tooltip" data-placement="top"
           title="Twitter" target="_blank" rel="noopener" aria-label="Twitter">
           <i class="fa-fw fab fa-twitter"></i>
         </a>
     
       
-        <a href="https://www.facebook.com/sharer/sharer.php?title=Elegant way to use deep learning on Mac OS - Yanan's  Blog&u=http://localhost:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/" data-toggle="tooltip" data-placement="top"
+        <a href="https://www.facebook.com/sharer/sharer.php?title=Elegant way of using deep learning on AMD Mac - Yanan's  Blog&u=http://localhost:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/" data-toggle="tooltip" data-placement="top"
           title="Facebook" target="_blank" rel="noopener" aria-label="Facebook">
           <i class="fa-fw fab fa-facebook-square"></i>
         </a>
     
       
-        <a href="https://telegram.me/share?text=Elegant way to use deep learning on Mac OS - Yanan's  Blog&url=http://localhost:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/" data-toggle="tooltip" data-placement="top"
+        <a href="https://telegram.me/share?text=Elegant way of using deep learning on AMD Mac - Yanan's  Blog&url=http://localhost:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/" data-toggle="tooltip" data-placement="top"
           title="Telegram" target="_blank" rel="noopener" aria-label="Telegram">
           <i class="fa-fw fab fa-telegram"></i>
         </a>
@@ -878,12 +877,12 @@ encoding: UTF-8
         
         
         
-        <li><a href="/posts/About_Gene_Essentiality_prediction/">Some ideas about gene essentiality prediction and graph neural network</a></li>
+        <li><a href="/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/">Elegant way of using deep learning on AMD Mac</a></li>
       
         
         
         
-        <li><a href="/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/">Elegant way to use deep learning on Mac OS</a></li>
+        <li><a href="/posts/About_Gene_Essentiality_prediction/">Some ideas about gene essentiality prediction and graph neural network</a></li>
       
 
       </ul>
@@ -932,6 +931,29 @@ encoding: UTF-8
         
         
 
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
 
 
   
@@ -945,6 +967,9 @@ encoding: UTF-8
       
         
         <a class="post-tag" href="/tags/gene-essentiality/">gene essentiality</a>
+      
+        
+        <a class="post-tag" href="/tags/writing/">writing</a>
       
 
       </div>
@@ -1006,6 +1031,19 @@ encoding: UTF-8
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  
     
 
 
@@ -1018,6 +1056,12 @@ encoding: UTF-8
 
 
 
+  
+    
+    
+      
+      
+    
   
     
     
@@ -1068,6 +1112,47 @@ encoding: UTF-8
 
                 What is the definition of gene essentiality (GE)?
 Gene essentiality is a core concept of genetics, and has important relevance in relation to fundamental areas such as evolutionary, and systems and...
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    
+      
+      
+      <div class="card">
+        <a href="/posts/How_to_write_a_systematic_review_using_PRISMA/">
+          <div class="card-body">
+            <!--
+  Date format snippet
+  See: /assets/js/_utils/timeage.js
+-->
+
+
+
+
+
+
+<span class="timeago small"
+  >Nov 16<i class="unloaded">2021-11-16T11:28:09+11:00</i>
+</span>
+
+            <h3 class="pt-0 mt-1 mb-3" data-toc-skip>How to write a systematic review using PRISMA</h3>
+            <div class="text-muted small">
+              <p>
+                
+
+
+
+
+
+                
+  The best practise is applying PRISMA as early as possible. It is critical to keep each step is clear and transparent.
+
+
+Introduction
+
+Systematic reviews serve many critical roles. They can provi...
               </p>
             </div>
           </div>
@@ -1254,6 +1339,29 @@ Gene essentiality is a core concept of genetics, and has important relevance in 
         
         
 
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
 
 
       
@@ -1262,6 +1370,9 @@ Gene essentiality is a core concept of genetics, and has important relevance in 
       
         
         <a class="post-tag" href="/tags/gene-essentiality/">gene essentiality</a>
+      
+        
+        <a class="post-tag" href="/tags/writing/">writing</a>
       
 
     </div>

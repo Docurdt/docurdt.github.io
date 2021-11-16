@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>Yanan's  Blog</title>
   <subtitle>Yanan, portfolio, publication, academia.</subtitle>
-  <updated>2021-11-16T01:30:16+11:00</updated>
+  <updated>2021-11-16T13:47:55+11:00</updated>
   <author>
     <name>Yanan</name>
     <uri>http://localhost:4000/</uri>
@@ -17,6 +17,52 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>How to write a systematic review using PRISMA</title>
+    <link href="http://localhost:4000/posts/How_to_write_a_systematic_review_using_PRISMA/" rel="alternate" type="text/html" title="How to write a systematic review using PRISMA" />
+    <published>2021-11-16T11:28:09+11:00</published>
+  
+    <updated>2021-11-16T11:28:09+11:00</updated>
+  
+    <id>http://localhost:4000/posts/How_to_write_a_systematic_review_using_PRISMA/</id>
+    <content src="http://localhost:4000/posts/How_to_write_a_systematic_review_using_PRISMA/" />
+    <author>
+      <name>Yanan</name>
+    </author>
+
+  
+    
+    <category term="Research" />
+    
+    <category term="Writing" />
+    
+    <category term="PRISMA" />
+    
+    <category term="Literature Review" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      
+  The best practise is applying PRISMA as early as possible. It is critical to keep each step is clear and transparent.
+
+
+Introduction
+
+Systematic reviews serve many critical roles. They can provide syntheses of the state of knowledge in a field, from which future research priorities can be identified; they can address questions that otherwise could not be answered by individual studies; they ...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -57,11 +103,11 @@ Gene essentiality is a core concept of genetics, and has important relevance in 
 
   
   <entry>
-    <title>Elegant way to use deep learning on Mac OS</title>
-    <link href="http://localhost:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/" rel="alternate" type="text/html" title="Elegant way to use deep learning on Mac OS" />
+    <title>Elegant way of using deep learning on AMD Mac</title>
+    <link href="http://localhost:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/" rel="alternate" type="text/html" title="Elegant way of using deep learning on AMD Mac" />
     <published>2018-11-12T09:38:09+11:00</published>
   
-    <updated>2021-11-12T18:35:46+11:00</updated>
+    <updated>2021-11-16T11:32:11+11:00</updated>
   
     <id>http://localhost:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/</id>
     <content src="http://localhost:4000/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/" />
@@ -85,15 +131,16 @@ Gene essentiality is a core concept of genetics, and has important relevance in 
 
 
 
-      Elegant way to use deep learning on Mac OS.
+      
+  Fabrice’s blog Deep Learning on a Mac with AMD GPU
 
-Thanks to the Fabrice’s blog Deep Learning on a Mac with AMD GPU
 
-The elegant solution for Deep Learning — PlaidML
+An elegant solution for Deep Learning — PlaidML
 
-Mainstream deep learning frameworks, such as Tensorflow, PyTorch or Caffe 2, are not so friendly for Mac OS, especially for the AMD based Mac series.
-
-Among the solutions introduced in Fabrice’s blog, I think PlaidML is the most elegant...
+Mainstream deep learning frameworks, such as Tensorflow, PyTorch, and Caffe 2, are not so friendly for AMD Mac.
+Among the solutions introduced in Fabrice’s blog, PlaidML is an elegant one to me.
+The installation and configuration of PlaidML can be found in the documentation of PlaidML.
+The s...
     </summary>
   
 
