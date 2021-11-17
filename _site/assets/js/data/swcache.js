@@ -25,6 +25,8 @@ const resource = [
   
     '/categories/',
   
+    '/test/',
+  
 
   /* --- Favicons --- */
   

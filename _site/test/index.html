@@ -23,23 +23,25 @@ encoding: UTF-8
 
   <!-- <!-- Begin Jekyll SEO tag v2.7.1 -->
 <meta name="generator" content="Jekyll v4.2.1" />
-<meta property="og:title" content="gene essentiality" />
+<meta property="og:title" content="Global Map Test" />
 <meta property="og:locale" content="en" />
 <meta name="description" content="Yanan, portfolio, publication, academia." />
 <meta property="og:description" content="Yanan, portfolio, publication, academia." />
-<link rel="canonical" href="http://localhost:4000/tags/gene-essentiality/" />
-<meta property="og:url" content="http://localhost:4000/tags/gene-essentiality/" />
+<link rel="canonical" href="http://localhost:4000/test/" />
+<meta property="og:url" content="http://localhost:4000/test/" />
 <meta property="og:site_name" content="Yanan’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-11-17T15:37:47+11:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="gene essentiality" />
+<meta property="twitter:title" content="Global Map Test" />
 <meta name="twitter:site" content="@docurdt" />
 <meta name="google-site-verification" content="lBWH5q3W_JCp6DHUMmwTw-dGGaC-KeY5NI9VF4AZpvg" />
 <script type="application/ld+json">
-{"description":"Yanan, portfolio, publication, academia.","headline":"gene essentiality","url":"http://localhost:4000/tags/gene-essentiality/","@type":"WebPage","@context":"https://schema.org"}</script>
+{"description":"Yanan, portfolio, publication, academia.","headline":"Global Map Test","dateModified":"2021-11-17T15:37:47+11:00","datePublished":"2021-11-17T15:37:47+11:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/test/"},"url":"http://localhost:4000/test/","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
  -->
 
-  <title>gene essentiality | Yanan's  Blog
+  <title>Global Map Test | Yanan's  Blog
   </title>
 
   <!--
@@ -97,6 +99,7 @@ encoding: UTF-8
   <script src="http://d3js.org/topojson.v0.min.js"></script>
 
 </head>
+
 
 
   <body data-spy="scroll" data-target="#toc">
@@ -170,7 +173,7 @@ encoding: UTF-8
       </a>
     </li> <!-- .nav-item -->
     
-    <li class="nav-item">
+    <li class="nav-item active">
       <a href="/test/" class="nav-link">
         <i class="fa-fw fas fa-info-circle ml-xl-3 mr-xl-3 unloaded"></i>
         
@@ -428,19 +431,9 @@ encoding: UTF-8
       
 
         
-          <span>
-            <a href="/tags">
-              Tags
-            </a>
-          </span>
-        
-
-      
-
-        
 
           
-            <span>gene essentiality</span>
+            <span>Global Map Test</span>
           
 
         
@@ -454,7 +447,7 @@ encoding: UTF-8
     <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i>
 
     <div id="topbar-title">
-      Tag
+      Global Map Test
     </div>
 
     <i id="search-trigger" class="fas fa-search fa-fw"></i>
@@ -472,6 +465,75 @@ encoding: UTF-8
 
     <div id="main-wrapper">
       <div id="main">
+
+        <script>
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+
+  // var projection = d3.geo.mercator().scale((width/1300)*100).translate([width/2, height/2]);
+  // var projection = d3.geo.gnomonic();
+  var projection = d3.geo.orthographic().scale(700).translate([width/2,height/2]).clipAngle(90);
+    // var projection = d3.geo.azimuthalEqualArea().scale((width/500)*100).translate([width/2, height/2]);
+
+  var color = d3.scale.category20c();
+
+  var svg = d3.select("#main")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+
+  svg.append("rect")
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr("fill", "black")
+        .attr("transform", "translate(0,0)");
+
+  var path = d3.geo.path()
+      .projection(projection);
+
+  var g = svg.append("g");
+
+  d3.json( "https://unpkg.com/world-atlas@1/world/110m.json",  function(error, topology) {
+      g.selectAll("path")
+        .data(topojson.object(topology, topology.objects.countries).geometries)
+            .enter()
+            .append("path")
+            .attr("width", width)
+            .attr("height", width/2)
+            .attr("d", path)
+            .attr("fill", function(d,i){
+                  return color(20);
+            })
+            .on("mouseover",function(d,i){
+                    d3.select(this)
+                      .attr("fill","yellow");
+              })
+              .on("mouseout",function(d,i){
+                    d3.select(this)
+                      .attr("fill",color(6))
+              })
+
+});
+
+d3.select("svg").call( /* 拖動事件在 SVG 元素上發生 */
+  d3.behavior.drag()
+    .origin(function() {
+      var r = projection.rotate(); /* 目前轉動的角度 ... */
+      return {x: r[0], y: -r[1]}; /* ... 做為這次拖動的起點 */
+    })
+    .on("drag", function() {
+      var r = projection.rotate();
+      /* 更新投影的角度 */
+      projection.rotate([d3.event.x, -d3.event.y, r[2]]);
+      /* 更新完投影後必須要重畫一遍地圖 */
+      d3.select("svg").selectAll("path").attr("d",path);
+    })
+);
+
+
+</script>
+
 
         <!--
   Refactor the HTML structure.
@@ -509,187 +571,6 @@ encoding: UTF-8
 
 
 <!-- return -->
-
-<div class="row">
-  <div class="col-12 col-lg-11 col-xl-8">
-    <div id="page" class="post pb-5 pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4 mb-md-4">
-    
-      
-
-
-
-<div id="page-tag">
-  <h1 class="pl-lg-2">
-    <i class="fa fa-tag fa-fw text-muted"></i>
-    gene essentiality
-    <span class="lead text-muted pl-2">1</span>
-  </h1>
-  <ul class="post-content pl-0">
-    
-
-    
-    <li class="d-flex justify-content-between pl-md-3 pr-md-3">
-      <a href="/posts/About_Gene_Essentiality_prediction/">Some ideas about gene essentiality prediction and graph neural network</a>
-      <span class="dash flex-grow-1"></span>
-      <span class="text-muted small">Nov 11, 2021</span>
-    </li>
-    
-  </ul>
-</div>
-
-    
-    </div> <!-- #page -->
-  </div><!-- .col-12 -->
-
-  <!--
-  The Pannel on right side (Desktop views)
--->
-
-
-
-
-
-<div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down">
-
-  <div class="access">
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-    <div id="access-lastmod" class="post">
-      <span>Recent Update</span>
-      <ul class="post-content pl-0 pb-1 ml-1 mt-2">
-
-      
-        
-        
-        
-        <li><a href="/posts/About_Gene_Essentiality_prediction/">Some ideas about gene essentiality prediction and graph neural network</a></li>
-      
-        
-        
-        
-        <li><a href="/posts/How_to_write_a_systematic_review_using_PRISMA/">How to write a systematic review using PRISMA</a></li>
-      
-        
-        
-        
-        <li><a href="/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/">Elegant way of using deep learning on AMD Mac</a></li>
-      
-
-      </ul>
-    </div> <!-- #access-lastmod -->
-
-  
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-
-
-  
-    <div id="access-tags">
-      <span>Trending Tags</span>
-      <div class="d-flex flex-wrap mt-3 mb-1 mr-3">
-
-      
-        
-        <a class="post-tag" href="/tags/computational-configuration/">computational configuration</a>
-      
-        
-        <a class="post-tag" href="/tags/gene-essentiality/">gene essentiality</a>
-      
-        
-        <a class="post-tag" href="/tags/writing/">writing</a>
-      
-
-      </div>
-    </div>
-  
-  </div> <!-- .access -->
-
-  
-
-</div> <!-- #panel-wrapper -->
-
-
-</div>
-
 
 
 

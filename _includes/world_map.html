@@ -1,0 +1,67 @@
+<script>
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+
+  // var projection = d3.geo.mercator().scale((width/1300)*100).translate([width/2, height/2]);
+  // var projection = d3.geo.gnomonic();
+  var projection = d3.geo.orthographic().scale(700).translate([width/2,height/2]).clipAngle(90);
+    // var projection = d3.geo.azimuthalEqualArea().scale((width/500)*100).translate([width/2, height/2]);
+
+  var color = d3.scale.category20c();
+
+  var svg = d3.select("#main")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+
+  svg.append("rect")
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr("fill", "black")
+        .attr("transform", "translate(0,0)");
+
+  var path = d3.geo.path()
+      .projection(projection);
+
+  var g = svg.append("g");
+
+  d3.json( "https://unpkg.com/world-atlas@1/world/110m.json",  function(error, topology) {
+      g.selectAll("path")
+        .data(topojson.object(topology, topology.objects.countries).geometries)
+            .enter()
+            .append("path")
+            .attr("width", width)
+            .attr("height", width/2)
+            .attr("d", path)
+            .attr("fill", function(d,i){
+                  return color(20);
+            })
+            .on("mouseover",function(d,i){
+                    d3.select(this)
+                      .attr("fill","yellow");
+              })
+              .on("mouseout",function(d,i){
+                    d3.select(this)
+                      .attr("fill",color(6))
+              })
+
+});
+
+d3.select("svg").call( /* 拖動事件在 SVG 元素上發生 */
+  d3.behavior.drag()
+    .origin(function() {
+      var r = projection.rotate(); /* 目前轉動的角度 ... */
+      return {x: r[0], y: -r[1]}; /* ... 做為這次拖動的起點 */
+    })
+    .on("drag", function() {
+      var r = projection.rotate();
+      /* 更新投影的角度 */
+      projection.rotate([d3.event.x, -d3.event.y, r[2]]);
+      /* 更新完投影後必須要重畫一遍地圖 */
+      d3.select("svg").selectAll("path").attr("d",path);
+    })
+);
+
+
+</script>
