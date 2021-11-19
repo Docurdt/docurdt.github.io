@@ -24,7 +24,7 @@
     var g = svg.append("g")
         .attr("transform", "translate(0, 50)");
 
-    d3.json("{{ base.url | prepend: site.url }}/countries-50m.json").then(function (topology) {
+    d3.json("{{ base.url | prepend: site.url }}/assets/countries-50m.json").then(function (topology) {
           g.selectAll("path")
               .data(topojson.feature(topology, topology.objects.countries).features)
               .enter().append("path")
