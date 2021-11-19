@@ -94,6 +94,11 @@ disqus:
 
 paginate: 10
 
+
+webrick:
+  headers:
+    Access-Control-Allow-Origin: "*"
+
 # ------------ The following options are not recommended to be modified ------------------
 
 kramdown:

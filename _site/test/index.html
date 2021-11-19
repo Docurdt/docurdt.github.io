@@ -31,13 +31,13 @@ encoding: UTF-8
 <meta property="og:url" content="http://localhost:4000/test/" />
 <meta property="og:site_name" content="Yanan’s Blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-11-19T14:05:18+11:00" />
+<meta property="article:published_time" content="2021-11-19T15:29:28+11:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Global Map Test" />
 <meta name="twitter:site" content="@docurdt" />
 <meta name="google-site-verification" content="lBWH5q3W_JCp6DHUMmwTw-dGGaC-KeY5NI9VF4AZpvg" />
 <script type="application/ld+json">
-{"headline":"Global Map Test","description":"Yanan, portfolio, publication, academia.","datePublished":"2021-11-19T14:05:18+11:00","dateModified":"2021-11-19T14:05:18+11:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/test/"},"url":"http://localhost:4000/test/","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"headline":"Global Map Test","description":"Yanan, portfolio, publication, academia.","datePublished":"2021-11-19T15:29:28+11:00","dateModified":"2021-11-19T15:29:28+11:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/test/"},"url":"http://localhost:4000/test/","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
  -->
 
@@ -492,7 +492,10 @@ encoding: UTF-8
     var g = svg.append("g")
         .attr("transform", "translate(0, 50)");
 
-    d3.json("https://unpkg.com/world-atlas@1/world/110m.json").then(function (topology) {
+    // https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json
+    // https://unpkg.com/world-atlas@1/world/110m.json
+    // "http://localhost:4000/assets/countries-50m.json"
+    d3.json("http://localhost:4000/countries-50m.json").then(function (topology) {
           g.selectAll("path")
               .data(topojson.feature(topology, topology.objects.countries).features)
               .enter().append("path")
