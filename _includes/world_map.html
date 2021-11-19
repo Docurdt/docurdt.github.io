@@ -1,144 +1,135 @@
 <script>
-  var width = window.innerWidth;
-  var height = window.innerHeight;
-  var color = d3.schemePaired;
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+    var color = d3.schemePaired;
 
-  var projection = d3.geoOrthographic()
-  .scale(height / 3.14)
-  .translate([width / 2, height / 2]);
+    var projection = d3.geoOrthographic()
+        .scale(height / 3.14)
+        .translate([width / 2, height / 2]);
 
-  var path = d3.geoPath()
-  .projection(projection);
+    var path = d3.geoPath()
+        .projection(projection);
 
-  var graticule = d3.geoGraticule();
+    var graticule = d3.geoGraticule();
 
-  var svg = d3.select("#main").append("svg")
-  .attr("width", width)
-  .attr("height", height);
+    var svg = d3.select("#main").append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-  svg.append("rect")
-  .attr("width", "100%")
-  .attr("height", "100%")
-  .attr("fill", "gray");
+    svg.append("rect")
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr("fill", "gray");
 
-  var g = svg.append("g")
-  .attr("transform", "translate(0, 50)");
+    var g = svg.append("g")
+        .attr("transform", "translate(0, 50)");
 
-  d3.json("https://unpkg.com/world-atlas@1/world/110m.json").then( function(topology) {
-    g.selectAll("path")
-    .data(topojson.feature(topology, topology.objects.countries).features)
-    .enter().append("path")
-    .attr("d", path)
-    .call(zoom(projection))
-    .attr("fill", function(d,i){
-      return color[2];
-    })
-    .on("mouseover",function(d,i){
-      d3.select(this)
-      .attr("fill",color[6]);
-    })
-    .on("mouseout",function(d,i){
-      d3.select(this)
-      .attr("fill",color[2])
+    d3.json("https://unpkg.com/world-atlas@1/world/110m.json").then(function (topology) {
+          g.selectAll("path")
+              .data(topojson.feature(topology, topology.objects.countries).features)
+              .enter().append("path")
+              .attr("d", path)
+              .call(zoom(projection))
+              .attr("fill", function (d, i) {
+                    return color[2];
+              })
+              .on("mouseover", function (d, i) {
+                    d3.select(this)
+                        .attr("fill", color[6]);
+              })
+              .on("mouseout", function (d, i) {
+                d3.select(this)
+                    .attr("fill", color[2])
+              });
     });
 
-  });
 
+    function drag(event) {
+      let v0, q0, r0;
 
-  function drag(event) {
-    let v0, q0, r0;
+      function dragstarted(event) {
+        v0 = versor.cartesian(projection.invert([event.x, event.y]));
+        q0 = versor(r0 = projection.rotate());
 
-    function dragstarted(event) {
-      v0 = versor.cartesian(projection.invert([event.x, event.y]));
-      q0 = versor(r0 = projection.rotate());
-
-    }
-
-    function dragged(event) {
-      const v1 = versor.cartesian(projection.rotate(r0).invert( [event.x, event.y]));
-      const q1 = versor.multiply(q0, versor.delta(v0, v1));
-      console.log(versor.rotation(q1));
-      projection.rotate(versor.rotation(q1));
-      svg.selectAll("path").attr("d", path);
-    }
-
-    return d3.drag()
-    .on("start", dragstarted)
-    .on("drag", dragged);
-  }
-
-
-
-
-  function zoom(projection, {
-    // Capture the projection’s original scale, before any zooming.
-    scale = projection._scale === undefined
-    ? (projection._scale = projection.scale())
-    : projection._scale,
-    scaleExtent = [0.8, 8]
-  } = {}) {
-    let v0, q0, r0, a0, tl;
-
-    const zoom = d3.zoom()
-    .scaleExtent(scaleExtent.map(x => x * scale))
-    .on("start", zoomstarted)
-    .on("zoom", zoomed);
-
-    function point(event, that) {
-      const t = d3.pointers(event, that);
-
-      if (t.length !== tl) {
-        tl = t.length;
-        if (tl > 1) a0 = Math.atan2(t[1][1] - t[0][1], t[1][0] - t[0][0]);
-        zoomstarted.call(that, event);
       }
 
-      return tl > 1
-      ? [
-      d3.mean(t, p => p[0]),
-      d3.mean(t, p => p[1]),
-      Math.atan2(t[1][1] - t[0][1], t[1][0] - t[0][0])
-      ]
-      : t[0];
-    }
-
-    function zoomstarted(event) {
-      // console.log(projection.invert(point(event, this)));
-      v0 = versor.cartesian(projection.invert(point(event, this)));
-      q0 = versor((r0 = projection.rotate()));
-    }
-
-    function zoomed(event) {
-      projection.scale(event.transform.k);
-      const pt = point(event, this);
-      const v1 = versor.cartesian(projection.rotate(r0).invert(pt));
-      const delta = versor.delta(v0, v1);
-      let q1 = versor.multiply(q0, delta);
-
-      // For multitouch, compose with a rotation around the axis.
-      if (pt[2]) {
-        const d = (pt[2] - a0) / 2;
-        const s = -Math.sin(d);
-        const c = Math.sign(Math.cos(d));
-        q1 = versor.multiply([Math.sqrt(1 - s * s), 0, 0, c * s], q1);
+      function dragged(event) {
+        const v1 = versor.cartesian(projection.rotate(r0).invert([event.x, event.y]));
+        const q1 = versor.multiply(q0, versor.delta(v0, v1));
+        console.log(versor.rotation(q1));
+        projection.rotate(versor.rotation(q1));
+        svg.selectAll("path").attr("d", path);
       }
 
-      projection.rotate(versor.rotation(q1));
-      svg.selectAll("path").attr("d", path);
-      // In vicinity of the antipode (unstable) of q0, restart.
-      if (delta[0] < 0.7) zoomstarted.call(this, event);
+      return d3.drag()
+      .on("start", dragstarted)
+      .on("drag", dragged);
     }
 
-    return Object.assign(selection => selection
-    .property("__zoom", d3.zoomIdentity.scale(projection.scale()))
-    .call(zoom), {
-      on(type, ...options) {
-        return options.length
-        ? (zoom.on(type, ...options), this)
-        : zoom.on(type);
+
+    function zoom(projection, {
+      scale = projection._scale === undefined ?
+      (projection._scale = projection.scale()) :
+      projection._scale,
+      scaleExtent = [0.8, 8]
+    } = {}) {
+      let v0, q0, r0, a0, tl;
+
+      const zoom = d3.zoom()
+      .scaleExtent(scaleExtent.map(x => x * scale))
+      .on("start", zoomstarted)
+      .on("zoom", zoomed);
+
+      function point(event, that) {
+        const t = d3.pointers(event, that);
+
+        if (t.length !== tl) {
+          tl = t.length;
+          if (tl > 1) a0 = Math.atan2(t[1][1] - t[0][1], t[1][0] - t[0][0]);
+          zoomstarted.call(that, event);
+        }
+
+        return tl > 1 ?
+        [
+        d3.mean(t, p => p[0]),
+        d3.mean(t, p => p[1]),
+        Math.atan2(t[1][1] - t[0][1], t[1][0] - t[0][0])
+        ] :
+        t[0];
       }
-    });
-  }
 
+      function zoomstarted(event) {
+        v0 = versor.cartesian(projection.invert(point(event, this)));
+        q0 = versor((r0 = projection.rotate()));
+      }
 
+      function zoomed(event) {
+        projection.scale(event.transform.k);
+        const pt = point(event, this);
+        const v1 = versor.cartesian(projection.rotate(r0).invert(pt));
+        const delta = versor.delta(v0, v1);
+        let q1 = versor.multiply(q0, delta);
+
+        if (pt[2]) {
+          const d = (pt[2] - a0) / 2;
+          const s = -Math.sin(d);
+          const c = Math.sign(Math.cos(d));
+          q1 = versor.multiply([Math.sqrt(1 - s * s), 0, 0, c * s], q1);
+        }
+
+        projection.rotate(versor.rotation(q1));
+        svg.selectAll("path").attr("d", path);
+        if (delta[0] < 0.7) zoomstarted.call(this, event);
+      }
+
+      return Object.assign(selection => selection
+      .property("__zoom", d3.zoomIdentity.scale(projection.scale()))
+      .call(zoom), {
+        on(type, ...options) {
+          return options.length ?
+          (zoom.on(type, ...options), this) :
+          zoom.on(type);
+        }
+      });
+    };
 </script>

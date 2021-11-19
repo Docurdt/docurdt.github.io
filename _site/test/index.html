@@ -31,13 +31,13 @@ encoding: UTF-8
 <meta property="og:url" content="http://localhost:4000/test/" />
 <meta property="og:site_name" content="Yanan’s Blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-11-19T12:23:21+11:00" />
+<meta property="article:published_time" content="2021-11-19T14:05:18+11:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Global Map Test" />
 <meta name="twitter:site" content="@docurdt" />
 <meta name="google-site-verification" content="lBWH5q3W_JCp6DHUMmwTw-dGGaC-KeY5NI9VF4AZpvg" />
 <script type="application/ld+json">
-{"headline":"Global Map Test","description":"Yanan, portfolio, publication, academia.","datePublished":"2021-11-19T12:23:21+11:00","dateModified":"2021-11-19T12:23:21+11:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/test/"},"url":"http://localhost:4000/test/","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"headline":"Global Map Test","description":"Yanan, portfolio, publication, academia.","datePublished":"2021-11-19T14:05:18+11:00","dateModified":"2021-11-19T14:05:18+11:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/test/"},"url":"http://localhost:4000/test/","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
  -->
 
@@ -466,253 +466,140 @@ encoding: UTF-8
     <div id="main-wrapper">
       <div id="main">
 
-        <style>
+        <script>
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+    var color = d3.schemePaired;
 
-  .names {
-  fill: none;
-  stroke: #fff;
-  stroke-linejoin: round;
-  }
+    var projection = d3.geoOrthographic()
+        .scale(height / 3.14)
+        .translate([width / 2, height / 2]);
 
-    /* Tooltip CSS */
-    .d3-tip {
-    line-height: 1.5;
-    font-weight: 400;
-    font-family:"avenir next", Arial, sans-serif;
-    padding: 6px;
-    background: rgba(0, 0, 0, 0.6);
-    color: #FFA500;
-    border-radius: 1px;
-    pointer-events: none;
-    }
+    var path = d3.geoPath()
+        .projection(projection);
 
-    /* Creates a small triangle extender for the tooltip */
-    .d3-tip:after {
-      box-sizing: border-box;
-      display: inline;
-      font-size: 8px;
-      width: 100%;
-      line-height: 1.5;
-      color: rgba(0, 0, 0, 0.6);
-      position: absolute;
-      pointer-events: none;
+    var graticule = d3.geoGraticule();
 
-    }
+    var svg = d3.select("#main").append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-    /* Northward tooltips */
-    .d3-tip.n:after {
-      content: "\25BC";
-      margin: -1px 0 0 0;
-      top: 100%;
-      left: 0;
-      text-align: center;
-    }
+    svg.append("rect")
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr("fill", "gray");
 
-    /* Eastward tooltips */
-    .d3-tip.e:after {
-      content: "\25C0";
-      margin: -4px 0 0 0;
-      top: 50%;
-      left: -8px;
-    }
+    var g = svg.append("g")
+        .attr("transform", "translate(0, 50)");
 
-    /* Southward tooltips */
-    .d3-tip.s:after {
-      content: "\25B2";
-      margin: 0 0 1px 0;
-      top: -8px;
-      left: 0;
-      text-align: center;
-    }
-
-    /* Westward tooltips */
-    .d3-tip.w:after {
-      content: "\25B6";
-      margin: -4px 0 0 -1px;
-      top: 50%;
-      left: 100%;
-    }
-
-/*    text{
-      pointer-events:none;
-    }*/
-
-    .details{
-      color:white;
-    }
-
-</style>
+    d3.json("https://unpkg.com/world-atlas@1/world/110m.json").then(function (topology) {
+          g.selectAll("path")
+              .data(topojson.feature(topology, topology.objects.countries).features)
+              .enter().append("path")
+              .attr("d", path)
+              .call(zoom(projection))
+              .attr("fill", function (d, i) {
+                    return color[2];
+              })
+              .on("mouseover", function (d, i) {
+                    d3.select(this)
+                        .attr("fill", color[6]);
+              })
+              .on("mouseout", function (d, i) {
+                d3.select(this)
+                    .attr("fill", color[2])
+              });
+    });
 
 
+    function drag(event) {
+      let v0, q0, r0;
 
-<script>
-  var width = window.innerWidth;
-  var height = window.innerHeight;
+      function dragstarted(event) {
+        v0 = versor.cartesian(projection.invert([event.x, event.y]));
+        q0 = versor(r0 = projection.rotate());
 
-//   // var projection = d3.geo.mercator().scale((width/1300)*100).translate([width/2, height/2]);
-//   // var projection = d3.geo.gnomonic();
-//   var projection = d3.geoOrthographic().scale(700).translate([width/2,height/2]).clipAngle(90);
-//     // var projection = d3.geo.azimuthalEqualArea().scale((width/500)*100).translate([width/2, height/2]);
-  var color = d3.schemePaired;
+      }
 
+      function dragged(event) {
+        const v1 = versor.cartesian(projection.rotate(r0).invert([event.x, event.y]));
+        const q1 = versor.multiply(q0, versor.delta(v0, v1));
+        console.log(versor.rotation(q1));
+        projection.rotate(versor.rotation(q1));
+        svg.selectAll("path").attr("d", path);
+      }
 
-
-// var width = 960, height = 680;
-
-// var projection = d3.geoEquirectangular()
-//     .scale(height / 3.14)
-//     .translate([width / 2, height / 2]);
-
-var projection = d3.geoOrthographic()
-    .scale(height / 3.14)
-    .translate([width / 2, height / 2]);
-
-var path = d3.geoPath()
-    .projection(projection);
-
-var graticule = d3.geoGraticule();
-
-var svg = d3.select("#main").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-  svg.append("rect")
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .attr("fill", "gray");
-
-var g = svg.append("g")
-    .attr("transform", "translate(0, 50)");
-
-d3.json("https://unpkg.com/world-atlas@1/world/110m.json").then( function(topology) {
-    g.selectAll("path")
-       .data(topojson.feature(topology, topology.objects.countries).features)
-       .enter().append("path")
-       .attr("d", path)
-       .call(zoom(projection))
-       .attr("fill", function(d,i){
-             return color[2];
-       })
-       .on("mouseover",function(d,i){
-               d3.select(this)
-                 .attr("fill",color[6]);
-         })
-         .on("mouseout",function(d,i){
-               d3.select(this)
-                 .attr("fill",color[2])
-         });
-
-});
-
-
-// const handleZoom = (e) => g.attr('transform', e.transform);
-//
-// const zoom = d3.zoom()
-//   .scaleExtent([1, 40])
-//   .on("zoom", handleZoom);
-
-// svg.call(zoom);
-
-
-function drag(event) {
-  let v0, q0, r0;
-
-  function dragstarted(event) {
-    v0 = versor.cartesian(projection.invert([event.x, event.y]));
-    q0 = versor(r0 = projection.rotate());
-
-  }
-
-  function dragged(event) {
-    const v1 = versor.cartesian(projection.rotate(r0).invert( [event.x, event.y]));
-    const q1 = versor.multiply(q0, versor.delta(v0, v1));
-    // console.log(event, v1, q1);
-    console.log(versor.rotation(q1));
-    projection.rotate(versor.rotation(q1));
-    // d3.geoRotation(versor.rotation(q1));
-    // projection.rotate([1, 1, 5]);
-    svg.selectAll("path").attr("d", path);
-  }
-
-  return d3.drag()
+      return d3.drag()
       .on("start", dragstarted)
       .on("drag", dragged);
-}
+    }
 
 
+    function zoom(projection, {
+      scale = projection._scale === undefined ?
+      (projection._scale = projection.scale()) :
+      projection._scale,
+      scaleExtent = [0.8, 8]
+    } = {}) {
+      let v0, q0, r0, a0, tl;
 
-
-function zoom(projection, {
-  // Capture the projection’s original scale, before any zooming.
-  scale = projection._scale === undefined
-    ? (projection._scale = projection.scale())
-    : projection._scale,
-  scaleExtent = [0.8, 8]
-} = {}) {
-  let v0, q0, r0, a0, tl;
-
-  const zoom = d3.zoom()
+      const zoom = d3.zoom()
       .scaleExtent(scaleExtent.map(x => x * scale))
       .on("start", zoomstarted)
       .on("zoom", zoomed);
 
-  function point(event, that) {
-    const t = d3.pointers(event, that);
+      function point(event, that) {
+        const t = d3.pointers(event, that);
 
-    if (t.length !== tl) {
-      tl = t.length;
-      if (tl > 1) a0 = Math.atan2(t[1][1] - t[0][1], t[1][0] - t[0][0]);
-      zoomstarted.call(that, event);
-    }
+        if (t.length !== tl) {
+          tl = t.length;
+          if (tl > 1) a0 = Math.atan2(t[1][1] - t[0][1], t[1][0] - t[0][0]);
+          zoomstarted.call(that, event);
+        }
 
-    return tl > 1
-      ? [
-          d3.mean(t, p => p[0]),
-          d3.mean(t, p => p[1]),
-          Math.atan2(t[1][1] - t[0][1], t[1][0] - t[0][0])
-        ]
-      : t[0];
-  }
+        return tl > 1 ?
+        [
+        d3.mean(t, p => p[0]),
+        d3.mean(t, p => p[1]),
+        Math.atan2(t[1][1] - t[0][1], t[1][0] - t[0][0])
+        ] :
+        t[0];
+      }
 
-  function zoomstarted(event) {
-    // console.log(projection.invert(point(event, this)));
-    v0 = versor.cartesian(projection.invert(point(event, this)));
-    q0 = versor((r0 = projection.rotate()));
-  }
+      function zoomstarted(event) {
+        v0 = versor.cartesian(projection.invert(point(event, this)));
+        q0 = versor((r0 = projection.rotate()));
+      }
 
-  function zoomed(event) {
-    projection.scale(event.transform.k);
-    const pt = point(event, this);
-    const v1 = versor.cartesian(projection.rotate(r0).invert(pt));
-    const delta = versor.delta(v0, v1);
-    let q1 = versor.multiply(q0, delta);
+      function zoomed(event) {
+        projection.scale(event.transform.k);
+        const pt = point(event, this);
+        const v1 = versor.cartesian(projection.rotate(r0).invert(pt));
+        const delta = versor.delta(v0, v1);
+        let q1 = versor.multiply(q0, delta);
 
-    // For multitouch, compose with a rotation around the axis.
-    if (pt[2]) {
-      const d = (pt[2] - a0) / 2;
-      const s = -Math.sin(d);
-      const c = Math.sign(Math.cos(d));
-      q1 = versor.multiply([Math.sqrt(1 - s * s), 0, 0, c * s], q1);
-    }
+        if (pt[2]) {
+          const d = (pt[2] - a0) / 2;
+          const s = -Math.sin(d);
+          const c = Math.sign(Math.cos(d));
+          q1 = versor.multiply([Math.sqrt(1 - s * s), 0, 0, c * s], q1);
+        }
 
-    projection.rotate(versor.rotation(q1));
-    svg.selectAll("path").attr("d", path);
-    // In vicinity of the antipode (unstable) of q0, restart.
-    if (delta[0] < 0.7) zoomstarted.call(this, event);
-  }
+        projection.rotate(versor.rotation(q1));
+        svg.selectAll("path").attr("d", path);
+        if (delta[0] < 0.7) zoomstarted.call(this, event);
+      }
 
-  return Object.assign(selection => selection
+      return Object.assign(selection => selection
       .property("__zoom", d3.zoomIdentity.scale(projection.scale()))
       .call(zoom), {
-    on(type, ...options) {
-      return options.length
-          ? (zoom.on(type, ...options), this)
-          : zoom.on(type);
-    }
-  });
-}
-
-
+        on(type, ...options) {
+          return options.length ?
+          (zoom.on(type, ...options), this) :
+          zoom.on(type);
+        }
+      });
+    };
 </script>
 
 
