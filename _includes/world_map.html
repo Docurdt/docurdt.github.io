@@ -24,9 +24,6 @@
     var g = svg.append("g")
         .attr("transform", "translate(0, 50)");
 
-    // https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json
-    // https://unpkg.com/world-atlas@1/world/110m.json
-    // "{{ base.url | prepend: site.url }}/assets/countries-50m.json"
     d3.json("{{ base.url | prepend: site.url }}/countries-50m.json").then(function (topology) {
           g.selectAll("path")
               .data(topojson.feature(topology, topology.objects.countries).features)
