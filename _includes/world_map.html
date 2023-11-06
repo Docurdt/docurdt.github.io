@@ -1,135 +1,321 @@
+<style>
+  .globe {
+    fill: #060061;}
+
+  div {
+    text-align: center;
+  }
+
+  .div {
+    background-color: lightsteelblue;
+    overflow: auto;
+  }
+
+  .div>.tooltip {
+    width: 120px;
+    height: 30px;
+    padding: 2px;
+    font: 12px sans-serif;
+    border: 0px;
+    border-radius: 2px;
+  }
+
+  .div>.menuText {
+    text-align: right;
+    width: 10%;
+    height: 100px;
+    line-height: 100px;
+    display: inline-block;
+  }
+
+  .div>.menuButton {
+    text-align: left;
+    width: 10%;
+    height: 100px;
+    line-height: 100px;
+    display: inline-block;
+  }
+
+
+  html, body {
+  margin:0px;
+  height:100%;
+  }
+
+  .box {
+  background:black;
+  position:absolute;
+  top:0px;
+  right:0px;
+  bottom:0px;
+  left:0px;
+  opacity:0.9;
+  }
+
+  /**
+* Set rules for how the map overlays
+* (information box and legend) will be displayed
+* on the page. */
+.map-overlay {
+  position: absolute;
+  top: 200px;
+  left: 10px;
+  background: rgba(200, 200, 200, 0.5);
+  margin-right: 15px;
+  font-family: Arial, sans-serif, white;
+  font-color: white;
+  overflow: auto;
+  border-radius: 3px;
+}
+
+#features {
+  top: 0;
+  height: 100px;
+  margin-top: 20px;
+  width: 230px;
+}
+
+#legend {
+  padding: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  line-height: 18px;
+  margin-bottom: 40px;
+  width: 200px;
+}
+
+.legend-key {
+  display: inline-block;
+  border-radius: 20%;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+#legend ul {
+  list-style-type:none;
+}
+
+#legend li {
+  margin-left: -40px;
+}
+
+
+</style>
+
 <script>
-    var width = window.innerWidth;
-    var height = window.innerHeight;
-    var color = d3.schemePaired;
+  // remove the title
+  var wrappers = d3.selectAll("div.wrapper").filter(function(d, i) {return i === 2;});
+  // 	console.log(wrappers);
+  wrappers.remove();
 
-    var projection = d3.geoOrthographic()
-        .scale(height / 3.14)
-        .translate([width / 2, height / 2]);
+  // Initialize the variables
+  // Buttons
+  var projectionList = ["Orthographic", "Mercator"];
+  var dataList = ["Weather"];
 
-    var path = d3.geoPath()
-        .projection(projection);
+  // Colors
+  var color2 = d3.scaleLinear().domain([-50, +50]).range(["white", "#69b3a2"]);
+  var color = d3.schemePaired;
+  var densityColor = d3.scaleLinear().domain([900, 1200]).range(["blue", "red"]);
 
-    var graticule = d3.geoGraticule();
+  // Size
+  var mainWidth = window.innerWidth;
+  var svgHeight = 0.9*window.innerHeight;
+  var ctrlHeight = 0.1*window.innerHeight;
 
-    var svg = d3.select("#main").append("svg")
-        .attr("width", width)
-        .attr("height", height);
+  //Projections
+  var projection = d3.geoRobinson().scale(svgHeight / 6).translate([mainWidth / 2 -200, svgHeight / 2]).rotate([-160, 0 / 60]).precision(0.1);
+  // Create the canvas
+  var box = d3.select("#main");
+	// create the canvas and context
+	var canvas = box.append('canvas').attr('width', mainWidth).attr('height', svgHeight);
+	var context = canvas.node().getContext('2d');
 
-    svg.append("rect")
-        .attr("width", "100%")
-        .attr("height", "100%")
-        .attr("fill", "gray");
+  var path = d3.geoPath().projection(projection).context(context);
+  context.clearRect(0, 0, mainWidth, svgHeight);
+    // set the background color
+  context.fillStyle = '#000000'; // rectangle color
+  context.fillRect(0, 0, mainWidth, svgHeight); // 4 arguments for the rect features: x, y, width and height
 
-    var g = svg.append("g")
-        .attr("transform", "translate(0, 50)");
+  // Create the control panel
+	box.append("div").attr("class", "div").html(`
+        <div class='map-overlay' id='legend'>
+            <div style="width: 75%; margin: 0 auto; text-align: left">
+                <h4>Projection</h4>
+            </div>
+            <div id="projection" style="width: 75%; margin: 0 auto; text-align: left">
+                <input type="radio" name="projectionButton" value="Robinson" checked> Robinson <br>
+                <input type="radio" name="projectionButton" value="Orthographic"> Orthographic <br>
+                <input type="radio" name="projectionButton" value="Mercator"> Mercator <br>
+            </div>
 
-    d3.json("{{ base.url | prepend: site.url }}/assets/countries-50m.json").then(function (topology) {
-          g.selectAll("path")
-              .data(topojson.feature(topology, topology.objects.countries).features)
-              .enter().append("path")
-              .attr("d", path)
-              .call(zoom(projection))
-              .attr("fill", function (d, i) {
-                    return color[2];
-              })
-              .on("mouseover", function (d, i) {
-                    d3.select(this)
-                        .attr("fill", color[6]);
-              })
-              .on("mouseout", function (d, i) {
-                d3.select(this)
-                    .attr("fill", color[2])
-              });
-    });
+            <div style="width: 75%; margin: 0 auto; text-align: left">
+                <h4>Data</h4>
+            </div>
+            <div id="loadData" style="width: 75%; margin: 0 auto; text-align: left">
+                <input type="radio" name="dataButton" value="temp_C" checked> Temperature <br>
+                <input type="radio" name="dataButton" value="wind"> Wind <br>
+                <input type="radio" name="dataButton" value="pressure_hp"> Pressure <br>
+                <input type="radio" name="dataButton" value="perticipation" > Perticipation <br>
+                <input type="radio" name="dataButton" value="uvb"> UVB <br>
+                <input type="radio" name="dataButton" value="relative_humidity"> Humidity <br>
+            </div>
+            <div style="width: 75%; margin: 0 auto; text-align: left">
+                <h4>Date</h4>
+            </div>
+            <div  id="date" style="width: 75%; margin: 0 auto; text-align: left">
+                <input type="range" name="date" id=dateSlider min="2" max="40" value="10">
+            </div>
+        </div>`);
 
 
-    function drag(event) {
-      let v0, q0, r0;
 
-      function dragstarted(event) {
-        v0 = versor.cartesian(projection.invert([event.x, event.y]));
-        q0 = versor(r0 = projection.rotate());
+  // Build the callback function for buttons
+  var projectionBtn = d3.select("#projection").selectAll('input');
+  projectionBtn.on('change', function(d) {
+        var tmpProjectionText = this.value;
+        console.log('Projection changed to ' + tmpProjectionText);
+        updateProjection(tmpProjectionText);
+  });
 
-      }
+  var loadDataBtn = d3.select("#loadData").selectAll('input');
+  loadDataBtn.on('change', function(d) {
+        var tmploadDataBtnText = this.value;
+        console.log('loadData type changed to ' + tmploadDataBtnText);
+        updateLoadData(tmploadDataBtnText);
+  });
 
-      function dragged(event) {
-        const v1 = versor.cartesian(projection.rotate(r0).invert([event.x, event.y]));
-        const q1 = versor.multiply(q0, versor.delta(v0, v1));
-        console.log(versor.rotation(q1));
-        projection.rotate(versor.rotation(q1));
-        svg.selectAll("path").attr("d", path);
-      }
 
-      return d3.drag()
-      .on("start", dragstarted)
-      .on("drag", dragged);
+  // Get Projection
+  function updateProjection(pro) {
+    if (pro === "Orthographic") {
+        projection = d3.geoOrthographic().scale((svgHeight - 100) / 3).translate([mainWidth / 2, svgHeight / 2]).precision(0.1);
     }
-
-
-    function zoom(projection, {
-      scale = projection._scale === undefined ?
-      (projection._scale = projection.scale()) :
-      projection._scale,
-      scaleExtent = [0.8, 8]
-    } = {}) {
-      let v0, q0, r0, a0, tl;
-
-      const zoom = d3.zoom()
-      .scaleExtent(scaleExtent.map(x => x * scale))
-      .on("start", zoomstarted)
-      .on("zoom", zoomed);
-
-      function point(event, that) {
-        const t = d3.pointers(event, that);
-
-        if (t.length !== tl) {
-          tl = t.length;
-          if (tl > 1) a0 = Math.atan2(t[1][1] - t[0][1], t[1][0] - t[0][0]);
-          zoomstarted.call(that, event);
-        }
-
-        return tl > 1 ?
-        [
-        d3.mean(t, p => p[0]),
-        d3.mean(t, p => p[1]),
-        Math.atan2(t[1][1] - t[0][1], t[1][0] - t[0][0])
-        ] :
-        t[0];
-      }
-
-      function zoomstarted(event) {
-        v0 = versor.cartesian(projection.invert(point(event, this)));
-        q0 = versor((r0 = projection.rotate()));
-      }
-
-      function zoomed(event) {
-        projection.scale(event.transform.k);
-        const pt = point(event, this);
-        const v1 = versor.cartesian(projection.rotate(r0).invert(pt));
-        const delta = versor.delta(v0, v1);
-        let q1 = versor.multiply(q0, delta);
-
-        if (pt[2]) {
-          const d = (pt[2] - a0) / 2;
-          const s = -Math.sin(d);
-          const c = Math.sign(Math.cos(d));
-          q1 = versor.multiply([Math.sqrt(1 - s * s), 0, 0, c * s], q1);
-        }
-
-        projection.rotate(versor.rotation(q1));
-        svg.selectAll("path").attr("d", path);
-        if (delta[0] < 0.7) zoomstarted.call(this, event);
-      }
-
-      return Object.assign(selection => selection
-      .property("__zoom", d3.zoomIdentity.scale(projection.scale()))
-      .call(zoom), {
-        on(type, ...options) {
-          return options.length ?
-          (zoom.on(type, ...options), this) :
-          zoom.on(type);
-        }
-      });
+    else if (pro === "Mercator") {
+        projection = d3.geoMercator().scale((svgHeight - 10) / 8).translate([mainWidth / 2, svgHeight / 2]).precision(0.1);
+    }
+    else if (pro === "Robinson") {
+        projection = d3.geoRobinson().scale(svgHeight / 6).translate([mainWidth / 2 -200, svgHeight / 2]).rotate([-160, 0 / 60]).precision(0.1);
     };
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    render();
+  };
+
+
+  // Get data for display
+  var displayData;
+
+  function updateLoadData(tmpLoadData) {
+      console.log(tmpLoadData);
+      var v;
+      displayData = loadData.map((d) => {
+        // console.log(d);
+          if (tmpLoadData === "temp_C") {
+            v = d.temp_C;
+          }
+          else if (tmpLoadData === "wind") {
+            v = d.wind_u;
+          }
+          else if (tmpLoadData === "pressure_hp") {
+            v = d.pressure_hp;
+          }
+          else if (tmpLoadData === "perticipation") {
+            v = d.perticipation_mm;
+          }
+          else if (tmpLoadData === "uvb") {
+            v = d.uvb;
+          }
+          else if (tmpLoadData === "relative_humidity") {
+            v = d.relative_humidity;
+          };
+
+          return {
+            "x": d.x,
+            "y": d.y,
+            "value": v
+          }
+        });
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        render();
+    };
+
+  // Load the data
+  var world, loadData;
+  Promise.all([
+    d3.json("https://unpkg.com/world-atlas@1/world/110m.json"),
+    d3.json("{{ base.url | prepend: site.url }}/assets/Sample_data_1day-2.json")
+  ]).then(function(data) {
+    world = data[0];
+    loadData = data[1];
+    // displayData = getData();
+    displayData = loadData.map((d) => {
+      // console.log(d);
+      return {
+        "x": d.x,
+        "y": d.y,
+        "value": d.temp_C
+      }
+    });
+    // console.log(displayData);
+    context.clearRect(0, 0, mainWidth, svgHeight);
+    render();
+  })
+
+  // // Render the map and data
+  // voronoiGenerator = d3.voronoi()
+  //     .x(d => d.x)
+  //     .y(d => d.y)
+  //     .size([mainWidth, svgHeight]);
+  //
+  // function drawCell(cell) {
+  //     if (!cell) return false;
+  //     context.moveTo(cell[0][0], cell[0][1]);
+  //     for (var j = 1, m = cell.length; j < m; ++j) {
+  //       context.lineTo(cell[j][0], cell[j][1]);
+  //     }
+  //     context.closePath();
+  //     return true;
+  //   }
+
+
+  function render() {
+    // var voronoi = d3.voronoi().x(d => {projection([d.x, d.y])[0]}).y(d => {projection([d.x, d.y])[1]});
+    // console.log(voronoi(displayData).polygons());
+
+    context.clearRect(0, 0, mainWidth, svgHeight);
+    var sphere = {type: "Sphere"};
+		var land = topojson.feature(world, world.objects.land);
+    path = d3.geoPath().projection(projection).context(context);
+    // var max = d3.max(loadData, function(d) { return d.temp_C;});
+    // var min = d3.min(loadData, function(d) { return d.temp_C;});
+    var max = d3.max(displayData, function(d) { return d.value;});
+    var min = d3.min(displayData, function(d) { return d.value;});
+    var color2 = d3.scaleSqrt().domain([min, max]).range(["blue", "red"]);
+    console.log("max" + max);
+    console.log("min" + min);
+    console.log("Colorscale" + color2);
+      // set the background color
+    context.fillStyle = '#000000'; // rectangle color
+    context.fillRect(0, 0, mainWidth, svgHeight); // 4 arguments for the rect features: x, y, width and height
+
+    context.beginPath(), path(sphere), context.fillStyle = "#000F", context.fill();
+    context.beginPath(), path(land), context.fillStyle = "#022", context.fill();
+    context.beginPath(), path(sphere), context.stroke();
+    // context.beginPath();
+    // for (var i = 0, n = voronoi(displayData).polygons().length; i < n; ++i) drawCell(voronoi(displayData).polygons()[i]);
+    // context.strokeStyle = "#000";
+    // context.stroke();
+
+
+    for (var i = 0; i < displayData.length; i++) {
+      var coords = projection([displayData[i].x, displayData[i].y]);
+    // 					console.log(coords);
+      var r = 1;
+      context.beginPath();
+      // Make an arc from 0 to Math.PI*2, aka a full circle
+      context.arc(coords[0], coords[1], r, 0, Math.PI*2, false);
+      context.fillStyle = color2(displayData[i].value);
+      context.fill();
+    };
+  }
 </script>

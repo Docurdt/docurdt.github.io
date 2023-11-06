@@ -6,8 +6,8 @@
 
 
 
-<html lang="en" 
-  
+<html lang="en"
+
 >
 
   <!--
@@ -19,7 +19,7 @@ encoding: UTF-8
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  
+
 
   <!-- <!-- Begin Jekyll SEO tag v2.7.1 -->
 <meta name="generator" content="Jekyll v4.2.1" />
@@ -31,13 +31,13 @@ encoding: UTF-8
 <meta property="og:url" content="http://localhost:4000/about/" />
 <meta property="og:site_name" content="Yanan’s Blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-11-19T15:29:28+11:00" />
+<meta property="article:published_time" content="2021-12-14T20:49:59+11:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="About" />
 <meta name="twitter:site" content="@docurdt" />
 <meta name="google-site-verification" content="lBWH5q3W_JCp6DHUMmwTw-dGGaC-KeY5NI9VF4AZpvg" />
 <script type="application/ld+json">
-{"headline":"About","description":"I am currently a PhD student at Biomedicine Discovery Institute of Monash University, majoring in Machine learning and Bioinformatics. My research topics include biological problems of Cancer image analysis and DNA/RNA/Protein sequence analysis, which are more challenges to application in terms of high-dimensional with small size datasets, unpredictable heterogeneous data, lack of annotations, etc. I am keen to apply machine learning algorithms to the data of reality to solve challenging analysis tasks. Stay playing, stay breathing!","datePublished":"2021-11-19T15:29:28+11:00","sameAs":["https://scholar.google.com/citations?user=P8V61zcAAAAJ&hl=en&oi=ao","https://twitter.com/docurdt","https://github.com/docurdt"],"dateModified":"2021-11-19T15:29:28+11:00","url":"http://localhost:4000/about/","@type":"WebSite","name":"Yanan","@context":"https://schema.org"}</script>
+{"headline":"About","description":"I am currently a PhD student at Biomedicine Discovery Institute of Monash University, majoring in Machine learning and Bioinformatics. My research topics include biological problems of Cancer image analysis and DNA/RNA/Protein sequence analysis, which are more challenges to application in terms of high-dimensional with small size datasets, unpredictable heterogeneous data, lack of annotations, etc. I am keen to apply machine learning algorithms to the data of reality to solve challenging analysis tasks. Stay playing, stay breathing!","datePublished":"2021-12-14T20:49:59+11:00","sameAs":["https://scholar.google.com/citations?user=P8V61zcAAAAJ&hl=en&oi=ao","https://twitter.com/docurdt","https://github.com/docurdt"],"dateModified":"2021-12-14T20:49:59+11:00","url":"http://localhost:4000/about/","@type":"WebSite","name":"Yanan","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
  -->
 
@@ -68,7 +68,7 @@ encoding: UTF-8
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
   <!-- GA -->
-  
+
 
   <!-- jsDelivr CDN -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
@@ -101,6 +101,10 @@ encoding: UTF-8
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="https://d3js.org/topojson.v1.min.js"></script>
   <script src="http://localhost:4000/assets/js/data/versor.js"></script>
+  <script src="https://d3js.org/d3-geo-projection.v2.min.js" rel="external nofollow" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-delaunay@6"></script>
+
 </head>
 
 
@@ -114,10 +118,10 @@ encoding: UTF-8
   <div class="profile-wrapper text-center">
     <div id="avatar">
       <a href="/" alt="avatar" class="mx-auto">
-        
-          
+
+
           <img src="/kurtsketch.gif" alt="avatar" onerror="this.style.display='none'">
-        
+
       </a>
     </div>
 
@@ -138,119 +142,119 @@ encoding: UTF-8
       </a>
     </li>
     <!-- the real tabs -->
-    
+
     <li class="nav-item active">
       <a href="/about/" class="nav-link">
         <i class="fa-fw fas fa-info-circle ml-xl-3 mr-xl-3 unloaded"></i>
-        
+
 
         <span>ABOUT</span>
       </a>
     </li> <!-- .nav-item -->
-    
+
     <li class="nav-item">
       <a href="/tags/" class="nav-link">
         <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i>
-        
+
 
         <span>TAGS</span>
       </a>
     </li> <!-- .nav-item -->
-    
+
     <li class="nav-item">
       <a href="/archives/" class="nav-link">
         <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i>
-        
+
 
         <span>ARCHIVES</span>
       </a>
     </li> <!-- .nav-item -->
-    
+
     <li class="nav-item">
       <a href="/categories/" class="nav-link">
         <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i>
-        
+
 
         <span>CATEGORIES</span>
       </a>
     </li> <!-- .nav-item -->
-    
+
     <li class="nav-item">
       <a href="/test/" class="nav-link">
         <i class="fa-fw fas fa-info-circle ml-xl-3 mr-xl-3 unloaded"></i>
-        
+
 
         <span>GLOBAL MAP TEST</span>
       </a>
     </li> <!-- .nav-item -->
-    
+
 
   </ul> <!-- ul.nav.flex-column -->
 
   <div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center">
 
-    
-      
 
-      
+
+
+
       <a href="https://github.com/docurdt" aria-label="github"
         class="order-3"
         target="_blank" rel="noopener">
         <i class="fab fa-github"></i>
       </a>
-      
 
-    
-      
 
-      
+
+
+
+
       <a href="https://scholar.google.com/citations?user=P8V61zcAAAAJ&hl=en&oi=ao" aria-label="googlescholar"
         class="order-4"
         target="_blank" rel="noopener">
         <i class="ai ai-google-scholar"></i>
       </a>
-      
 
-    
-      
 
-      
+
+
+
+
       <a href="https://twitter.com/docurdt" aria-label="twitter"
         class="order-5"
         target="_blank" rel="noopener">
         <i class="fab fa-twitter"></i>
       </a>
-      
 
-    
-      
 
-      
+
+
+
+
       <a href="
           javascript:location.href = 'mailto:' + ['yanan.wang1','monash.edu'].join('@')" aria-label="email"
         class="order-6"
         >
         <i class="fas fa-envelope"></i>
       </a>
-      
 
-    
-      
 
-      
+
+
+
+
       <a href="/feed.xml" aria-label="rss"
         class="order-7"
         >
         <i class="fas fa-rss"></i>
       </a>
-      
 
-    
 
-    
-      
+
+
+
+
         <span class="icon-border order-2"></span>
-      
+
 
       <span id="mode-toggle-wrapper" class="order-1">
         <!--
@@ -400,7 +404,7 @@ encoding: UTF-8
 </script>
 
       </span>
-    
+
 
   </div> <!-- .sidebar-bottom -->
 
@@ -415,34 +419,34 @@ encoding: UTF-8
   <div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between">
     <span id="breadcrumb">
 
-    
 
-    
 
-      
 
-        
+
+
+
+
           <span>
             <a href="/">
               Home
             </a>
           </span>
 
-        
 
-      
 
-        
 
-          
+
+
+
+
             <span>About</span>
-          
 
-        
 
-      
 
-    
+
+
+
+
 
     </span><!-- endof #breadcrumb -->
 
@@ -508,7 +512,7 @@ encoding: UTF-8
 <div class="row">
   <div class="col-12 col-lg-11 col-xl-8">
     <div id="page" class="post pb-5 pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4 mb-md-4">
-    
+
       <h1 class="dynamic-title">
         About
       </h1>
@@ -543,23 +547,48 @@ Stay playing, stay breathing!</p>
 
 <h2 id="publications">Publications</h2>
 <ul>
-  <li>Wang, Y., Wang, Y., Hu, C., Li, M., Fan, Y., Otter, N., Sam, I., Gou, H., Hu, Y., &amp; Kwok, T. (2021). Cell graph neural networks enable digital staging of tumour microenvironment and precisely predict patient survival in gastric cancer. medRxiv.</li>
-  <li>Chen, Z., Zhao, P., Li, F., Wang, Y., Smith, A. I., Webb, G. I., Akutsu, T., Baggag, A., Bensmail, H., &amp; Song, J. (2020). Comprehensive review and assessment of computational methods for predicting RNA post-transcriptional modification sites from RNA sequences. Briefings in Bioinformatics, 21(5), 1676-1696.</li>
-  <li>Li, M., Wang, Y., Li, F., Zhao, Y., Liu, M., Zhang, S., Bin, Y., Smith, A. I., Webb, G., &amp; Li, J. (2020). A deep learning-based method for identification of bacteriophage-host interaction. IEEE/ACM Transactions on Computational Biology and Bioinformatics.</li>
+  <li>Liu, Y., Zhang, Y., Xie, W., Zhao, J., Dong, Y., Xu, C., Wang, Y., Li, M., Wang, G., Zhu, X., Wang, W., Lin, K., Lu, H., Han, Y., Li, L., Duan, J., Cai, S., Wang, J. and Wang, Z. (2023), IMPACT: A web server for exploring immunotherapeutic predictive and cancer prognostic biomarkers. Clin. Transl. Med., 13: e1354. https://doi.org/10.1002/ctm2.1354</li>
+
+  <li>Wen, H., Feng, Z., Ge, H., Wang, Y., Wang, J., Sun, X., Yang, B., Quan, C., Zhou, X., & Wu, X. (2023). DNA methylation patterns between tissue and blood samples in ovarian cancer. Journal of Clinical Oncology, 41(16_suppl), 5558-5558. https://doi.org/10.1200/JCO.2023.41.16_suppl.5558</li>
+
+  <li>Wang, X., Tang, Z., Wang, Y., Yang, J., Shi, Z., Liu, D., Zhou, Q., Xu, Y., Qiu, F., Gu, Y., Min, L., Ding, C., Zhou, P., & Sun, Y. (2023). Comparison of multi-omics biomarkers via liquid biopsy in early detection of gastric cancer. Journal of Clinical Oncology, 41(16_suppl), e16066-e16066. https://doi.org/10.1200/JCO.2023.41.16_suppl.e16066</li>
+
+  <li>Wen, H., Feng, Z., Ge, H., Quan, C., Zhou, X., Yang, B., Liu, F., Wang, J., Wang, Y., Zhao, J., Zhou, G., Wen, X., Liu, Y., Zhu, X., Wang, G., Zhang, Y., Li, B., Cai, S., Zhang, Z., & Wu, X. (2022). 603P Multi-cancer early detection in gynaecological malignancies based on integrating multi-omics assays by liquid biopsy: A prospective study. Annals of Oncology, 33, S821-S822. https://doi.org/10.1016/j.annonc.2022.07.731</li>
+
+  <li>Wang, Y., Wang, Y.G., Hu, C. et al. (2022) Cell graph neural networks enable the precise prediction of patient survival in gastric cancer. npj Precis. Onc. 6, 45. https://doi.org/10.1038/s41698-022-00285-5</li>
+
+  <li>Wang, Y., Hu, C., Kwok, T. et al. (2022) DEMoS: a deep learning-based ensemble approach for predicting the molecular subtypes of gastric adenocarcinomas from histopathological images, Bioinformatics, Volume 38, Issue 17, September 2022, Pages 4206–4213, https://doi.org/10.1093/bioinformatics/btac456</li>
+
+  <li>Wang, Y., Yang, L., Webb, G. I., Ge, Z., & Song, J. (2021). OCTID: a one-class learning-based Python package for tumor image detection. Bioinformatics, 37(21), 3986-3988. https://doi.org/10.1093/bioinformatics/btab416</li>
+
+  <li>Wang, Y., Coudray, N., Zhao, Y., Li, F., Hu, C., Zhang, Y. Z., Imoto, S., Tsirigos, A., Webb, G. I., Daly, R. J., & Song, J. (2021). HEAL: an automated deep learning framework for cancer histopathology image analysis. Bioinformatics, 37(22), 4291-4295. https://doi.org/10.1093/bioinformatics/btab380</li>
+
   <li>Wang, Y., Li, F., Bharathwaj, M., Rosas, N. C., Leier, A., Akutsu, T., Webb, G. I., Marquez-Lago, T. T., Li, J., &amp; Lithgow, T. (2021). DeepBL: a deep learning-based approach for in silico discovery of beta-lactamases. Briefings in Bioinformatics, 22(4), bbaa301.</li>
-  <li>Wang, Y., Coudray, N., Zhao, Y., Li, F., Hu, C., Zhang, Y.-Z., Imoto, S., Tsirigos, A., Webb, G. I., &amp; Daly, R. J. (2021). HEAL: an automated deep learning framework for cancer histopathology image analysis. Bioinformatics.</li>
-  <li>Chen, Z., Zhao, P., Li, F., Leier, A., Marquez-Lago, T. T., Wang, Y., Webb, G. I., Smith, A. I., Daly, R. J., &amp; Chou, K.-C. (2018). iFeature: a python package and web server for features extraction and selection from protein and peptide sequences. Bioinformatics, 34(14), 2499-2502.</li>
-  <li>Song, J., Wang, Y., Li, F., Akutsu, T., Rawlings, N. D., Webb, G. I., &amp; Chou, K.-C. (2019). iProt-Sub: a comprehensive package for accurately mapping and predicting protease-specific substrates and cleavage sites. Briefings in Bioinformatics, 20(2), 638-658.</li>
-  <li>Wang, Y., Song, J., Marquez-Lago, T. T., Leier, A., Li, C., Lithgow, T., Webb, G. I., &amp; Shen, H.-B. (2017). Knowledge-transfer learning for prediction of matrix metalloprotease substrate-cleavage sites. Scientific Reports, 7(1), 1-15.</li>
+
+
   <li>Chen, Y.-Z., Wang, Z.-Z., Wang, Y., Ying, G., Chen, Z., &amp; Song, J. (2021). nhKcr: a new bioinformatics tool for predicting crotonylation sites on human nonhistone proteins based on deep learning. Briefings in Bioinformatics.</li>
-  <li>Wang, Y., Yang, L., Webb, G. I., Ge, Z., &amp; Song, J. (2021). OCTID: a one-class learning-based Python package for tumor image detection. Bioinformatics.</li>
+
+  <li>Chen, Z., Zhao, P., Li, F., Wang, Y., Smith, A. I., Webb, G. I., Akutsu, T., Baggag, A., Bensmail, H., &amp; Song, J. (2020). Comprehensive review and assessment of computational methods for predicting RNA post-transcriptional modification sites from RNA sequences. Briefings in Bioinformatics, 21(5), 1676-1696.</li>
+
+
+  <li>Li, M., Wang, Y., Li, F., Zhao, Y., Liu, M., Zhang, S., Bin, Y., Smith, A. I., Webb, G., &amp; Li, J. (2020). A deep learning-based method for identification of bacteriophage-host interaction. IEEE/ACM Transactions on Computational Biology and Bioinformatics.</li>
+
   <li>Li, F., Leier, A., Liu, Q., Wang, Y., Xiang, D., Akutsu, T., Webb, G. I., Smith, A. I., Marquez-Lago, T., &amp; Li, J. (2020). Procleave: predicting protease-specific substrate cleavage sites by combining sequence and structural information. Genomics, proteomics &amp; bioinformatics, 18(1), 52-64.</li>
-  <li>Li, F., Wang, Y., Li, C., Marquez-Lago, T. T., Leier, A., Rawlings, N. D., Haffari, G., Revote, J., Akutsu, T., &amp; Chou, K.-C. (2019). Twenty years of bioinformatics research for protease-specific substrate and cleavage site prediction: a comprehensive revisit and benchmarking of existing methods. Briefings in Bioinformatics, 20(6), 2150-2166.</li>
+
   <li>Wang, Q., Verma, J., Vidan, N., Wang, Y., Tucey, T. M., Lo, T. L., Harrison, P. F., See, M., Swaminathan, A., &amp; Kuchler, K. (2020). The YEATS domain histone crotonylation readers control virulence-related biology of a major human pathogen. Cell Reports, 31(3), 107528.</li>
+
+  <li>Song, J., Wang, Y., Li, F., Akutsu, T., Rawlings, N. D., Webb, G. I., &amp; Chou, K.-C. (2019). iProt-Sub: a comprehensive package for accurately mapping and predicting protease-specific substrates and cleavage sites. Briefings in Bioinformatics, 20(2), 638-658.</li>
+
+  <li>Li, F., Wang, Y., Li, C., Marquez-Lago, T. T., Leier, A., Rawlings, N. D., Haffari, G., Revote, J., Akutsu, T., &amp; Chou, K.-C. (2019). Twenty years of bioinformatics research for protease-specific substrate and cleavage site prediction: a comprehensive revisit and benchmarking of existing methods. Briefings in Bioinformatics, 20(6), 2150-2166.</li>
+
+  <li>Chen, Z., Zhao, P., Li, F., Leier, A., Marquez-Lago, T. T., Wang, Y., Webb, G. I., Smith, A. I., Daly, R. J., &amp; Chou, K.-C. (2018). iFeature: a python package and web server for features extraction and selection from protein and peptide sequences. Bioinformatics, 34(14), 2499-2502.</li>
+
+  <li>Wang, Y., Song, J., Marquez-Lago, T. T., Leier, A., Li, C., Lithgow, T., Webb, G. I., &amp; Shen, H.-B. (2017). Knowledge-transfer learning for prediction of matrix metalloprotease substrate-cleavage sites. Scientific Reports, 7(1), 1-15.</li>
+
 </ul>
 
       </div>
-    
+
     </div> <!-- #page -->
   </div><!-- .col-12 -->
 
@@ -575,7 +604,6 @@ Stay playing, stay breathing!</p>
 
   <div class="access">
 
-  
 
 
 
@@ -590,35 +618,33 @@ Stay playing, stay breathing!</p>
 
 
 
-  
+
+
 
     <div id="access-lastmod" class="post">
       <span>Recent Update</span>
       <ul class="post-content pl-0 pb-1 ml-1 mt-2">
 
-      
-        
-        
-        
+
+
+
+
         <li><a href="/posts/About_Gene_Essentiality_prediction/">Some ideas about gene essentiality prediction and graph neural network</a></li>
-      
-        
-        
-        
+
+
+
+
         <li><a href="/posts/How_to_write_a_systematic_review_using_PRISMA/">How to write a systematic review using PRISMA</a></li>
-      
-        
-        
-        
+
+
+
+
         <li><a href="/posts/The-way-to-deep-learning-with-AMD-GPU-on-Mac-OS/">Elegant way of using deep learning on AMD Mac</a></li>
-      
+
 
       </ul>
     </div> <!-- #access-lastmod -->
 
-  
-
-  
 
 
 
@@ -634,78 +660,81 @@ Stay playing, stay breathing!</p>
 
 
 
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-        
-        
 
 
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div id="access-tags">
       <span>Trending Tags</span>
       <div class="d-flex flex-wrap mt-3 mb-1 mr-3">
 
-      
-        
+
+
         <a class="post-tag" href="/tags/computational-configuration/">computational configuration</a>
-      
-        
+
+
         <a class="post-tag" href="/tags/gene-essentiality/">gene essentiality</a>
-      
-        
+
+
         <a class="post-tag" href="/tags/writing/">writing</a>
-      
+
 
       </div>
     </div>
-  
+
   </div> <!-- .access -->
 
-  
+
 
 </div> <!-- #panel-wrapper -->
 
@@ -726,22 +755,22 @@ Stay playing, stay breathing!</p>
       <p class="mb-0">
         © 2021
         <a href="https://scholar.google.com/citations?user=P8V61zcAAAAJ&hl=en&oi=ao">Yanan</a>.
-        
+
         <span data-toggle="tooltip" data-placement="top"
           title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span>
-        
+
       </p>
     </div>
 
     <div class="footer-right">
       <p class="mb-0">
-        
 
-        
 
-        Powered by 
+
+
+        Powered by
           <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>
-         with 
+         with
           <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a>
          theme.
 
@@ -762,7 +791,6 @@ Stay playing, stay breathing!</p>
     <div id="search-hints">
       <h4 class="text-muted mb-4">Trending Tags</h4>
 
-      
 
 
 
@@ -778,66 +806,67 @@ Stay playing, stay breathing!</p>
 
 
 
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-      
-        
-        
 
 
 
-      
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <a class="post-tag" href="/tags/computational-configuration/">computational configuration</a>
-      
-        
+
+
         <a class="post-tag" href="/tags/gene-essentiality/">gene essentiality</a>
-      
-        
+
+
         <a class="post-tag" href="/tags/writing/">writing</a>
-      
+
 
     </div>
     <div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
@@ -847,7 +876,7 @@ Stay playing, stay breathing!</p>
 
     </div> <!-- #main-wrapper -->
 
-    
+
 
     <div id="mask"></div>
 
@@ -924,4 +953,3 @@ SimpleJekyllSearch({
   </body>
 
 </html>
-
